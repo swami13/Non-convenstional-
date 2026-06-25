@@ -1,0 +1,359 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);color:var(--color-text-primary);background:transparent}
+.app{padding:1rem 0}
+.header{display:flex;align-items:center;gap:12px;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:0.5px solid var(--color-border-tertiary)}
+.badge{background:#CECBF6;color:#3C3489;font-size:11px;font-weight:500;padding:3px 8px;border-radius:4px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.5rem}
+.tab{padding:6px 14px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);font-size:13px;cursor:pointer;background:var(--color-background-primary);color:var(--color-text-secondary);transition:all 0.15s}
+.tab.active{background:#EEEDFE;color:#3C3489;border-color:#AFA9EC;font-weight:500}
+.tab:hover:not(.active){background:var(--color-background-secondary)}
+.unit-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.25rem;margin-bottom:1rem}
+.unit-title{font-size:15px;font-weight:500;margin-bottom:4px;color:var(--color-text-primary)}
+.unit-sub{font-size:13px;color:var(--color-text-secondary);margin-bottom:1rem}
+.topic-list{list-style:none;display:flex;flex-direction:column;gap:6px}
+.topic-item{font-size:13px;color:var(--color-text-secondary);padding:6px 10px;background:var(--color-background-secondary);border-radius:6px;display:flex;gap:8px;align-items:flex-start}
+.topic-item i{color:#7F77DD;margin-top:1px;flex-shrink:0}
+.mcq-section{display:flex;flex-direction:column;gap:1rem}
+.mcq-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.25rem}
+.q-meta{display:flex;gap:8px;align-items:center;margin-bottom:10px}
+.unit-tag{font-size:11px;padding:2px 8px;border-radius:4px;font-weight:500;background:#E1F5EE;color:#085041}
+.bl-tag{font-size:11px;padding:2px 8px;border-radius:4px;background:#FAEEDA;color:#633806}
+.q-text{font-size:14px;font-weight:500;margin-bottom:12px;color:var(--color-text-primary);line-height:1.5}
+.options{display:flex;flex-direction:column;gap:6px}
+.opt{padding:8px 12px;border:0.5px solid var(--color-border-tertiary);border-radius:6px;font-size:13px;cursor:pointer;background:var(--color-background-secondary);color:var(--color-text-primary);text-align:left;transition:all 0.15s}
+.opt:hover{border-color:var(--color-border-secondary);background:var(--color-background-primary)}
+.opt.correct{background:#EAF3DE;border-color:#639922;color:#27500A}
+.opt.wrong{background:#FCEBEB;border-color:#A32D2D;color:#501313}
+.reveal-btn{margin-top:10px;padding:7px 14px;font-size:13px;border:0.5px solid var(--color-border-secondary);border-radius:6px;cursor:pointer;background:var(--color-background-primary);color:var(--color-text-secondary)}
+.reveal-btn:hover{background:var(--color-background-secondary)}
+.answer-reveal{margin-top:10px;padding:10px 12px;background:#E1F5EE;border-radius:6px;font-size:13px;color:#085041;display:none}
+.theory-section{display:flex;flex-direction:column;gap:1rem}
+.theory-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.25rem}
+.theory-q{font-size:14px;font-weight:500;margin-bottom:8px;color:var(--color-text-primary);line-height:1.5}
+.answer-box{background:var(--color-background-secondary);border-radius:6px;padding:10px 12px;font-size:13px;color:var(--color-text-secondary);display:none;line-height:1.6;margin-top:8px}
+.show-ans-btn{font-size:12px;padding:5px 12px;border:0.5px solid var(--color-border-secondary);border-radius:5px;cursor:pointer;background:transparent;color:var(--color-text-secondary)}
+.show-ans-btn:hover{background:var(--color-background-secondary)}
+.marks-pill{font-size:11px;padding:2px 8px;border-radius:4px;background:#FBEAF0;color:#72243E;font-weight:500}
+.section-header{font-size:13px;font-weight:500;color:var(--color-text-secondary);margin-bottom:0.75rem;text-transform:uppercase;letter-spacing:0.05em}
+.progress-bar-wrap{background:var(--color-background-secondary);border-radius:99px;height:6px;margin:8px 0 1.25rem}
+.progress-bar{background:#7F77DD;height:6px;border-radius:99px;transition:width 0.3s}
+.score-display{font-size:13px;color:var(--color-text-secondary);margin-bottom:0.5rem}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1rem}
+.filter-btn{padding:4px 10px;font-size:12px;border:0.5px solid var(--color-border-secondary);border-radius:99px;cursor:pointer;background:transparent;color:var(--color-text-secondary)}
+.filter-btn.active{background:#EEEDFE;color:#3C3489;border-color:#AFA9EC}
+.empty{color:var(--color-text-tertiary);font-size:13px;text-align:center;padding:2rem}
+</style>
+
+<div class="app">
+<h2 class="sr-only">NCER BTMEC801F Revision App — 6 Units Study Tool</h2>
+<div class="header">
+  <div>
+    <div style="font-size:18px;font-weight:500;margin-bottom:4px">NCER Revision App</div>
+    <div style="font-size:13px;color:var(--color-text-secondary)">BTMEC801F · Final Year Mech · DBATU</div>
+  </div>
+  <div style="margin-left:auto;display:flex;gap:6px">
+    <span class="badge">6 Units</span>
+    <span class="badge" style="background:#E1F5EE;color:#085041">Exam Ready</span>
+  </div>
+</div>
+
+<div class="tabs" id="tabs">
+  <button class="tab active" onclick="showTab('syllabus')">📋 Syllabus</button>
+  <button class="tab" onclick="showTab('mcq')">🎯 MCQ Practice</button>
+  <button class="tab" onclick="showTab('theory')">📝 Theory Q&A</button>
+  <button class="tab" onclick="showTab('papers')">📄 Exam Pattern</button>
+</div>
+
+<div id="tab-syllabus">
+<p class="section-header">Unit-wise syllabus</p>
+<div class="unit-card">
+  <div class="unit-title">Unit 1 — Introduction & Solar Cells</div>
+  <div class="unit-sub">CO-01 · 6–8 Lectures</div>
+  <ul class="topic-list">
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>World energy scenario — fossil fuel crisis, need for non-conventional sources</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Classification of energy resources — renewable vs non-renewable</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>India's energy policy — MNRE, IREDA, CASE (1981)</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Solar cell theory — p-n junction, photovoltaic effect, band diagram</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Solar cell materials, arrays, power plants, limitations</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Czochralski process, zone refining for silicon crystal growth</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>PV water pumping system</li>
+  </ul>
+</div>
+<div class="unit-card">
+  <div class="unit-title">Unit 2 — Solar Thermal Energy</div>
+  <div class="unit-sub">CO-02 · 6–8 Lectures</div>
+  <ul class="topic-list">
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Solar radiation geometry — zenith angle, azimuth, hour angle, declination, solar constant</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Solar spectrum, clarity index, day length hours</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Flat plate collectors — liquid & air heaters, materials, performance</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Evacuated tube collectors — principle, working</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Focusing/concentrating collectors — CSP systems</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Solar thermal power plants, solar heating & cooling</li>
+  </ul>
+</div>
+<div class="unit-card">
+  <div class="unit-title">Unit 3 — Wind & Ocean Energy</div>
+  <div class="unit-sub">CO-02 · 6–8 Lectures</div>
+  <ul class="topic-list">
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Wind energy — sources, data, energy estimation</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Wind machine parameters — cut-in, cut-out, rated speed; tip speed ratio; Betz limit</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Rotor types — horizontal axis (HAWT) vs vertical axis (VAWT)</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>OTEC (Ocean Thermal Energy Conversion) — open & closed cycle</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Wave & tidal energy principles</li>
+  </ul>
+</div>
+<div class="unit-card">
+  <div class="unit-title">Unit 4 — Biomass & Geothermal Energy</div>
+  <div class="unit-sub">CO-03 · 6–8 Lectures</div>
+  <ul class="topic-list">
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Biomass — definition, feedstocks, energy crops</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Conversion processes — combustion, anaerobic digestion (biogas), gasification, fermentation</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Biogas — composition, production, advantages/disadvantages</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Geothermal energy — resources, classification</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Geothermal systems — dry steam, flash steam, binary cycle, EGS</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Geothermal heat pump; environmental considerations</li>
+  </ul>
+</div>
+<div class="unit-card">
+  <div class="unit-title">Unit 5 — Energy Storage: Batteries & Fuel Cells</div>
+  <div class="unit-sub">CO-04 · 6–8 Lectures</div>
+  <ul class="topic-list">
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Batteries — primary vs secondary, parts and functions</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Lead-acid (Pb-A), Ni-Zn, Lithium-ion batteries — construction & working</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>C-rate, charge-discharge curves, polarization curves</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Fuel cells — principle, components, types (PEMFC, AFC, PAFC, MCFC, SOFC)</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Fuel cell polarization — activation, ohmic, concentration losses</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>PV cell — operating principle (revisited for energy storage context)</li>
+  </ul>
+</div>
+<div class="unit-card">
+  <div class="unit-title">Unit 6 — Advanced Storage & Emerging Technologies</div>
+  <div class="unit-sub">CO-05 · 6–8 Lectures</div>
+  <ul class="topic-list">
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Flywheel energy storage — principle, construction, advantages</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Supercapacitors — construction, working, comparison with flywheels</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>MHD (Magnetohydrodynamic) power generation — principle, working</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>MHD challenges and limitations</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Thermoelectric & thermionic energy conversion basics</li>
+  </ul>
+</div>
+</div>
+
+<div id="tab-mcq" style="display:none">
+<div class="filter-row" id="mcq-filters">
+  <span style="font-size:13px;color:var(--color-text-secondary);align-self:center">Filter:</span>
+  <button class="filter-btn active" onclick="filterMCQ('all',this)">All units</button>
+  <button class="filter-btn" onclick="filterMCQ('U1',this)">Unit 1</button>
+  <button class="filter-btn" onclick="filterMCQ('U2',this)">Unit 2</button>
+  <button class="filter-btn" onclick="filterMCQ('U3',this)">Unit 3</button>
+  <button class="filter-btn" onclick="filterMCQ('U4',this)">Unit 4</button>
+  <button class="filter-btn" onclick="filterMCQ('U5',this)">Unit 5</button>
+  <button class="filter-btn" onclick="filterMCQ('U6',this)">Unit 6</button>
+</div>
+<div id="mcq-score-wrap" style="display:none">
+  <div class="score-display" id="mcq-score-text"></div>
+  <div class="progress-bar-wrap"><div class="progress-bar" id="mcq-bar"></div></div>
+</div>
+<div class="mcq-section" id="mcq-list"></div>
+</div>
+
+<div id="tab-theory" style="display:none">
+<div class="filter-row" id="theory-filters">
+  <span style="font-size:13px;color:var(--color-text-secondary);align-self:center">Filter:</span>
+  <button class="filter-btn active" onclick="filterTheory('all',this)">All</button>
+  <button class="filter-btn" onclick="filterTheory('U1',this)">Unit 1</button>
+  <button class="filter-btn" onclick="filterTheory('U2',this)">Unit 2</button>
+  <button class="filter-btn" onclick="filterTheory('U3',this)">Unit 3</button>
+  <button class="filter-btn" onclick="filterTheory('U4',this)">Unit 4</button>
+  <button class="filter-btn" onclick="filterTheory('U5',this)">Unit 5</button>
+  <button class="filter-btn" onclick="filterTheory('U6',this)">Unit 6</button>
+</div>
+<div class="theory-section" id="theory-list"></div>
+</div>
+
+<div id="tab-papers" style="display:none">
+<div class="unit-card">
+  <div class="unit-title">Exam pattern (ESE) — DBATU BTMEC801F</div>
+  <div class="unit-sub">Total: 60 marks · Duration: 3 hrs 45 min</div>
+  <ul class="topic-list">
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i><strong>Q1 — MCQ (12 marks):</strong> 12 objective questions × 1 mark each. All compulsory. Covers all 6 units.</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i><strong>Q2 to Q6 — Descriptive (48 marks):</strong> Each question has 3 sub-parts (A/B/C), attempt any 2. Each sub-part = 6 marks. One question per unit roughly.</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Scientific non-programmable calculator allowed.</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Assume suitable data and state assumptions clearly.</li>
+  </ul>
+</div>
+<div class="unit-card">
+  <div class="unit-title">CA / MSE pattern (Internal)</div>
+  <div class="unit-sub">College level assessment</div>
+  <ul class="topic-list">
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>MCQ section: 1 mark each (CO-01 to CO-05)</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Descriptive: 5 marks each (short answer) or 6 marks each (long answer)</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Questions usually tied to specific COs (CO-01 to CO-05)</li>
+  </ul>
+</div>
+<div class="unit-card">
+  <div class="unit-title">High-priority topics (from past papers)</div>
+  <div class="unit-sub">Repeated in 2022 May & July papers + college question banks</div>
+  <ul class="topic-list">
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Solar cell working principle & PV system components</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Flat plate collector as solar air heater (with sketch)</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>MHD power generation — principle & challenges</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Fuel cell — design, working principle, types</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Lithium-ion battery — construction & working (with sketch)</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>OTEC — open cycle (with sketch)</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Wind rotors types — propeller type sketch</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Flywheel vs supercapacitor comparison</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Biomass — feedstocks, conversion processes, advantages</li>
+    <li class="topic-item"><i class="ti ti-point-filled" aria-hidden="true"></i>Geothermal — types, heat pump, environmental impacts</li>
+  </ul>
+</div>
+</div>
+</div>
+
+<script>
+const MCQ_DATA = [
+  {u:'U1',q:'World Energy Needs are rising mainly due to ____',opts:['Deforestation','Increasing population and industrialization','Inflation','Natural calamities'],ans:1,bl:'L2'},
+  {u:'U1',q:'CASE (Commission for Additional Sources of Energy) was established in March 1981 after the oil crisis of:',opts:['1969','1973','1979','1965'],ans:1,bl:'L1'},
+  {u:'U1',q:'IREDA was developed by the Government of India to:',opts:['Implement efficient conventional energy use','Promote non-conventional energy development','Develop nuclear energy','Control pollution'],ans:1,bl:'L1'},
+  {u:'U1',q:'The only country with a full-fledged ministry for development of new and renewable resources is:',opts:['USA','China','India','Bangladesh'],ans:2,bl:'L1'},
+  {u:'U1',q:'Which scheme was launched by MNRE for solar pump sets?',opts:['MNREGA','UJJWALA','KUSUM','JWALA'],ans:2,bl:'L2'},
+  {u:'U2',q:'A solar cell converts light energy directly into electricity by the:',opts:['Chemical effect','Photovoltaic effect','Atmospheric effect','Physical effect'],ans:1,bl:'L2'},
+  {u:'U2',q:'Photovoltaic cell converts solar energy into:',opts:['Heat energy','Electric energy','Mechanical energy','Chemical energy'],ans:1,bl:'L2'},
+  {u:'U2',q:'CSP systems use ____ to focus a large area of sunlight into a small beam.',opts:['Lenses','Mirrors','Trackers','All of the above'],ans:3,bl:'L1'},
+  {u:'U2',q:'Heating and cooling of the atmosphere generates:',opts:['Conduction currents','Radiation currents','Convection currents','All of the above'],ans:2,bl:'L1'},
+  {u:'U3',q:'The main source of wind energy is:',opts:['Uneven land','The Sun','Vegetation','Seasons'],ans:1,bl:'L2'},
+  {u:'U3',q:'Wind energy is converted to electrical energy using:',opts:['Turbine + Generator','Only motors','Only blades','Condensers'],ans:0,bl:'L2'},
+  {u:'U3',q:'Which has the largest installed grid-interactive renewable power capacity in India?',opts:['Wind power','Solar power','Biomass power','Small Hydro'],ans:1,bl:'L1'},
+  {u:'U3',q:'The Betz limit states that a wind turbine can extract a maximum of ____ of wind kinetic energy.',opts:['59.3%','70%','45%','80%'],ans:0,bl:'L2'},
+  {u:'U4',q:'Biomass energy is energy derived from:',opts:['Nuclear fission','Living or recently living organisms','Fossil fuels','Solar radiation'],ans:1,bl:'L2'},
+  {u:'U4',q:'Which is NOT a type of biomass feedstock?',opts:['Wood','Agricultural waste','Municipal solid waste','Coal'],ans:3,bl:'L2'},
+  {u:'U4',q:'Converting biomass into gaseous fuel like methane is called:',opts:['Photosynthesis','Fermentation / Anaerobic digestion','Combustion','Sublimation'],ans:1,bl:'L1'},
+  {u:'U4',q:'What is geothermal energy?',opts:['Energy from the sun','Energy from Earth\'s internal heat','Energy from wind turbines','Energy from nuclear fusion'],ans:1,bl:'L2'},
+  {u:'U4',q:'Geothermal energy used directly to heat or cool buildings is called:',opts:['Geothermal power plant','Geothermal heat pump','Enhanced geothermal system','Flash steam plant'],ans:1,bl:'L2'},
+  {u:'U4',q:'Which is a type of geothermal power system?',opts:['Dry steam','Flash steam','Enhanced geothermal system (EGS)','All of the above'],ans:3,bl:'L2'},
+  {u:'U5',q:'A fuel cell generates electricity through:',opts:['Combustion of fuel','Electrochemical reaction of hydrogen and oxygen','Nuclear fission','Photovoltaic effect'],ans:1,bl:'L2'},
+  {u:'U5',q:'Which type of fuel cell uses a polymer membrane as electrolyte?',opts:['AFC','MCFC','PEMFC','SOFC'],ans:2,bl:'L2'},
+  {u:'U5',q:'C-rate of a battery refers to:',opts:['Charge efficiency','Rate of charge or discharge relative to capacity','Carbon content of electrolyte','Cycle life'],ans:1,bl:'L2'},
+  {u:'U5',q:'In a lead-acid battery, the electrolyte used is:',opts:['KOH','Sulphuric acid (H₂SO₄)','HCl','NaOH'],ans:1,bl:'L1'},
+  {u:'U5',q:'The polarization curve of a fuel cell shows losses due to:',opts:['Activation losses only','Ohmic losses only','Concentration losses only','All three: activation, ohmic, concentration'],ans:3,bl:'L2'},
+  {u:'U6',q:'Flywheel stores energy as:',opts:['Chemical energy','Electrical energy','Rotational kinetic energy','Thermal energy'],ans:2,bl:'L1'},
+  {u:'U6',q:'In MHD power generation, electricity is generated by moving ____ through a magnetic field.',opts:['Solid conductor','Ionized gas (plasma)','Liquid mercury','Cold water'],ans:1,bl:'L2'},
+  {u:'U6',q:'Compared to batteries, supercapacitors have:',opts:['Higher energy density but lower power density','Lower energy density but higher power density and longer cycle life','Same energy density','Neither energy nor power advantage'],ans:1,bl:'L2'},
+  {u:'U6',q:'The main advantage of a flywheel over a supercapacitor is:',opts:['Higher cycle efficiency','Can store more energy for longer duration','No moving parts','Cheaper to manufacture'],ans:1,bl:'L2'},
+];
+
+const THEORY_DATA = [
+  {u:'U1',q:'What is a solar cell? Explain with neat sketch.',marks:5,ans:'A solar cell (photovoltaic cell) is a semiconductor device that converts sunlight directly into DC electricity using the photovoltaic effect. Construction: p-type and n-type silicon form a p-n junction. When photons strike the junction, electron-hole pairs are generated. The built-in electric field at the junction separates charges — electrons to n-side and holes to p-side. This creates a potential difference (EMF) across the cell. External circuit completes the flow of current. Key parameters: Voc (open-circuit voltage ~0.5–0.6V), Isc (short-circuit current), Fill Factor, efficiency (15–22% commercial). Materials: mono-crystalline Si, poly-crystalline Si, thin-film (CdTe, CIGS), amorphous Si.',bl:'L2'},
+  {u:'U1',q:'Explain the Czochralski process for silicon crystal growth.',marks:6,ans:'The Czochralski (CZ) process is used to grow single-crystal (monocrystalline) silicon ingots for solar cells and semiconductors. Steps: (1) Pure silicon is melted in a quartz crucible at ~1415°C. (2) A small seed crystal of Si is dipped into the melt. (3) The seed is slowly pulled upward and rotated simultaneously. (4) Silicon atoms arrange themselves in the same crystal structure as the seed. (5) A large cylindrical ingot forms and is later sliced into wafers. Advantage: produces highest purity, single-crystal wafers with best PV efficiency. Disadvantage: energy-intensive, slow, expensive vs. polycrystalline methods.',bl:'L2'},
+  {u:'U1',q:'What is photovoltaic (PV) water pumping system? Explain with neat sketch.',marks:5,ans:'A PV water pumping system uses solar panels to power an electric pump for irrigation, drinking water, etc. Components: (1) PV array — generates DC power from sunlight. (2) Power conditioning unit (PCU)/inverter — converts DC to AC or controls motor speed. (3) Electric motor (AC or DC). (4) Centrifugal pump — pumps water from source. (5) Water storage tank. Working: Sunlight → PV array → DC power → PCU → Motor → Pump → Water raised. Advantages: No fuel cost, low maintenance, suitable for remote areas. Limitation: Works only in daylight; needs battery backup for 24-hour operation.',bl:'L2'},
+  {u:'U2',q:'Explain solar flat plate collector as a solar air heater with neat sketch.',marks:6,ans:'A flat plate collector (FPC) absorbs solar radiation and transfers heat to a working fluid (air). Construction: (1) Transparent cover (glass) — allows solar radiation in, reduces convection losses. (2) Absorber plate — blackened metal (copper/aluminium) to absorb maximum radiation. (3) Air channel — air flows between absorber plate and back insulation. (4) Insulation — bottom and sides to reduce heat loss. (5) Casing — metal frame. Working: Solar radiation passes through glass → absorbed by blackened plate → plate heats up → air flowing in the channel gets heated by convection → hot air is extracted. Applications: crop drying, space heating, industrial process heat.',bl:'L2'},
+  {u:'U2',q:'Explain the following solar radiation terms: Solar constant, Solar spectrum, Clarity Index, Declination angle, Zenith angle, Day length.',marks:6,ans:'1. Solar constant (Isc): The average solar radiation intensity received per unit area at Earth\'s mean orbital distance = 1367 W/m². 2. Solar spectrum: Distribution of solar energy with wavelength — UV (< 400nm), visible (400–700nm), infrared (>700nm). 3. Clarity Index (Kt): Ratio of global horizontal radiation to extraterrestrial radiation on horizontal surface. Indicates atmospheric clarity. 4. Declination angle (δ): Angular position of sun w.r.t. equatorial plane. Ranges from +23.45° (summer solstice) to −23.45° (winter solstice). 5. Zenith angle (θz): Angle between the sun and the vertical (directly overhead). 0° = sun overhead, 90° = sunset. 6. Day length (N): Time between sunrise and sunset. N = (2/15) × cos⁻¹(−tan φ × tan δ) hours.',bl:'L2'},
+  {u:'U3',q:'Derive expression for power developed due to wind. Define Betz limit.',marks:6,ans:'Wind power derivation: Consider air of density ρ (kg/m³) flowing with velocity V (m/s) through rotor area A (m²). Mass flow rate: ṁ = ρAV. Kinetic energy of wind = ½ṁV² = ½ρAV³. So Wind Power P = ½ρAV³. Betz Limit: A turbine cannot extract all wind energy — it must leave some kinetic energy to move air away. Max theoretical efficiency = 16/27 ≈ 59.3% (Betz limit). This is achieved at optimal velocity ratio V₂/V₁ = 1/3. Practical turbines achieve 35–45% efficiency. Key takeaway: P ∝ V³ and ∝ A — so doubling wind speed multiplies power by 8.',bl:'L2'},
+  {u:'U3',q:'What is OTEC? Explain open cycle OTEC with neat sketch.',marks:6,ans:'OTEC (Ocean Thermal Energy Conversion) exploits the temperature difference between warm surface ocean water (~25–28°C) and cold deep water (~4–5°C) to generate power. Minimum ΔT required: ~20°C. Open Cycle OTEC: (1) Warm surface seawater is admitted into a low-pressure evaporator (vacuum chamber). (2) Water flash-evaporates to steam at low pressure. (3) Steam drives a low-pressure turbine connected to a generator. (4) Exhaust steam is condensed by cold deep seawater — producing desalinated water as byproduct. (5) Cold water is pumped from 1000m depth. Advantages: Renewable, produces desalinated water. Limitations: Very low thermal efficiency (~3%), high capital cost, suitable only near tropics.',bl:'L2'},
+  {u:'U4',q:'What is biogas? Explain how it is produced and its advantages.',marks:6,ans:'Biogas is a mixture of gases produced by anaerobic digestion of organic matter. Composition: ~55–70% methane (CH₄), ~30–40% CO₂, traces of H₂S. Production process (Anaerobic Digestion): (1) Hydrolysis — complex organics broken into simpler molecules. (2) Acidogenesis — bacteria convert to volatile fatty acids. (3) Acetogenesis — acids converted to acetic acid, H₂, CO₂. (4) Methanogenesis — methanogens convert to methane. Feedstocks: cow dung, food waste, agricultural waste, sewage sludge. Advantages: Renewable, reduces methane emissions from waste, slurry is excellent fertilizer (digestate), decentralized energy for rural areas. Disadvantages: Seasonal variation, requires consistent feedstock, H₂S causes corrosion.',bl:'L2'},
+  {u:'U4',q:'What is geothermal energy? Explain its types and working.',marks:6,ans:'Geothermal energy is heat energy extracted from the Earth\'s interior (core, mantle). Sources: radioactive decay, residual heat from Earth\'s formation. Types of geothermal systems: (1) Dry steam — steam is directly extracted from underground fractures and used to drive a turbine. Oldest type (e.g., Geysers, California). (2) Flash steam — hot pressurized water (>180°C) is brought to surface; pressure drop causes flashing to steam which drives turbine. Most common type. (3) Binary cycle — geothermal water heats a secondary fluid (e.g., isobutane) with lower boiling point; secondary fluid vaporizes and drives turbine. Used for lower-temperature resources. (4) Enhanced Geothermal System (EGS) — water is injected into hot dry rock, heated, and extracted. Geothermal heat pump: uses shallow ground temperature (~15°C constant) for space heating/cooling. Advantages: Reliable, low emissions, consistent (unlike solar/wind).',bl:'L2'},
+  {u:'U5',q:'What is a fuel cell? Explain its operating principle and types.',marks:6,ans:'A fuel cell is an electrochemical device that converts chemical energy of a fuel (usually hydrogen) directly into electrical energy without combustion. Principle: At anode: H₂ → 2H⁺ + 2e⁻ (oxidation). Electrons flow through external circuit (generate electricity). At cathode: ½O₂ + 2H⁺ + 2e⁻ → H₂O (reduction). Net reaction: H₂ + ½O₂ → H₂O + electricity + heat. Types: (1) PEMFC (Polymer Electrolyte Membrane) — low temp (~80°C), used in vehicles. (2) AFC (Alkaline) — uses KOH electrolyte, used in space. (3) PAFC (Phosphoric Acid) — medium temp (~200°C), commercial power. (4) MCFC (Molten Carbonate) — high temp (~650°C), can use natural gas. (5) SOFC (Solid Oxide) — very high temp (~1000°C), highest efficiency. Polarization losses: activation, ohmic, concentration. Advantages: High efficiency (40–60%), zero direct emissions, silent.',bl:'L2'},
+  {u:'U5',q:'What is a lead-acid battery? Explain its construction and working.',marks:5,ans:'Lead-acid (Pb-A) is the oldest and most widely used secondary (rechargeable) battery. Construction: Positive plate — lead dioxide (PbO₂). Negative plate — spongy lead (Pb). Electrolyte — dilute sulphuric acid (H₂SO₄, ~1.28 specific gravity). Separator — porous insulator between plates. Casing — hard rubber or plastic. Discharge reactions: At anode (−): Pb + SO₄²⁻ → PbSO₄ + 2e⁻. At cathode (+): PbO₂ + SO₄²⁻ + 4H⁺ + 2e⁻ → PbSO₄ + 2H₂O. Cell voltage: ~2V per cell; 12V battery = 6 cells. Charging reverses reactions. Advantages: Low cost, reliable, recyclable. Disadvantages: Heavy, lead toxicity, limited cycle life (~300–500 cycles).',bl:'L2'},
+  {u:'U6',q:'Describe flywheel energy storage with neat sketch.',marks:5,ans:'A flywheel stores energy as rotational kinetic energy. Construction: A massive cylindrical rotor made of high-strength material (steel or carbon fibre composite) mounted on a shaft with low-friction bearings (magnetic bearings in modern systems). Often enclosed in vacuum to reduce windage losses. Working: Charging — an electric motor spins the flywheel up to high RPM, storing kinetic energy (E = ½Iω²). Discharging — flywheel drives a generator as it slows down, releasing electrical energy. Energy stored: E = ½ × I × ω² (I = moment of inertia, ω = angular velocity). Advantages: Very high power density, fast charge/discharge, long cycle life (millions of cycles), no chemical degradation. Disadvantages: Self-discharge due to friction, safety risk (gyroscopic effects), high cost for carbon fibre rotors.',bl:'L1'},
+  {u:'U6',q:'Discuss the operating principle of MHD power generation with neat sketch. What are its challenges?',marks:5,ans:'MHD (Magnetohydrodynamic) generation produces electricity from a conducting fluid (plasma/ionized gas) moving through a magnetic field, using the Lorentz force (F = qv × B). Principle: Hot ionized gas (seed gas + combustion products at ~2500°C) flows at high velocity through a duct. A strong magnetic field (B) is applied perpendicular to flow. Moving ions experience force, separating positive and negative charges. Electrodes on walls collect current. DC power is output directly — no moving mechanical parts. Working fluid: Combustion gas seeded with potassium carbonate to improve conductivity. Challenges: (1) Need very high temperatures (>2000°C) for ionization. (2) Electrode erosion due to high-temperature plasma. (3) Seed material (K) recovery is complex. (4) Low conversion efficiency alone; must be combined with steam cycle. (5) High capital cost; still mostly research-stage.',bl:'L2'},
+  {u:'U6',q:'Compare flywheel and supercapacitor as energy storage devices.',marks:5,ans:'Both are high-power density storage devices used for short-duration, fast charge/discharge. Flywheel: Stores energy as rotational KE. Energy density: moderate (5–100 Wh/kg). Power density: very high. Cycle life: millions of cycles. Self-discharge: ~20%/hour (friction). Applications: UPS, grid stabilization, regenerative braking. Supercapacitor (EDLC): Stores energy electrostatically (electric double layer at electrode–electrolyte interface). Energy density: lower than flywheel (~5–10 Wh/kg). Power density: extremely high (1–10 kW/kg). Cycle life: >500,000 cycles. Self-discharge: significant (~40%/day). Applications: hybrid vehicles, burst power in electronics, regenerative braking. Summary: Supercapacitors are preferred for very fast pulses and miniaturization; flywheels for longer duration and utility-scale applications.',bl:'L2'},
+];
+
+let mcqAnswered = {};
+let theoryShown = {};
+let currentMCQFilter = 'all';
+let currentTheoryFilter = 'all';
+
+function showTab(id) {
+  ['syllabus','mcq','theory','papers'].forEach(t => {
+    document.getElementById('tab-'+t).style.display = t===id ? 'block' : 'none';
+  });
+  document.querySelectorAll('.tab').forEach((el,i) => {
+    const tabs = ['syllabus','mcq','theory','papers'];
+    el.classList.toggle('active', tabs[i]===id);
+  });
+  if(id==='mcq' && document.getElementById('mcq-list').innerHTML==='') renderMCQ();
+  if(id==='theory' && document.getElementById('theory-list').innerHTML==='') renderTheory();
+}
+
+function renderMCQ() {
+  const list = document.getElementById('mcq-list');
+  const data = currentMCQFilter==='all' ? MCQ_DATA : MCQ_DATA.filter(q=>q.u===currentMCQFilter);
+  if(data.length===0){list.innerHTML='<div class="empty">No questions for this unit.</div>';return;}
+  list.innerHTML = data.map((q,gi) => {
+    const i = MCQ_DATA.indexOf(q);
+    const opts = q.opts.map((o,oi) => `<button class="opt" id="opt-${i}-${oi}" onclick="selectOpt(${i},${oi})">${String.fromCharCode(65+oi)}. ${o}</button>`).join('');
+    return `<div class="mcq-card" id="mcq-${i}">
+      <div class="q-meta"><span class="unit-tag">${q.u}</span><span class="bl-tag">${q.bl}</span></div>
+      <div class="q-text">Q. ${q.q}</div>
+      <div class="options">${opts}</div>
+      <div class="answer-reveal" id="ans-${i}"></div>
+    </div>`;
+  }).join('');
+  updateScore();
+}
+
+function selectOpt(qi, oi) {
+  if(mcqAnswered[qi] !== undefined) return;
+  mcqAnswered[qi] = oi;
+  const q = MCQ_DATA[qi];
+  const opts = document.querySelectorAll(`#mcq-${qi} .opt`);
+  opts.forEach((btn, idx) => {
+    if(idx === q.ans) btn.classList.add('correct');
+    else if(idx === oi && oi !== q.ans) btn.classList.add('wrong');
+  });
+  const ansDiv = document.getElementById(`ans-${qi}`);
+  ansDiv.textContent = oi === q.ans ? '✓ Correct!' : `✗ Correct answer: ${String.fromCharCode(65+q.ans)}. ${q.opts[q.ans]}`;
+  ansDiv.style.display = 'block';
+  ansDiv.style.background = oi === q.ans ? '#EAF3DE' : '#FCEBEB';
+  ansDiv.style.color = oi === q.ans ? '#27500A' : '#501313';
+  updateScore();
+}
+
+function updateScore() {
+  const answered = Object.keys(mcqAnswered).length;
+  const correct = Object.entries(mcqAnswered).filter(([qi,oi]) => MCQ_DATA[qi].ans === oi).length;
+  if(answered === 0){document.getElementById('mcq-score-wrap').style.display='none';return;}
+  document.getElementById('mcq-score-wrap').style.display='block';
+  document.getElementById('mcq-score-text').textContent = `Score: ${correct}/${answered} answered (${Math.round(correct/answered*100)}% correct)`;
+  document.getElementById('mcq-bar').style.width = Math.round(correct/MCQ_DATA.length*100)+'%';
+}
+
+function filterMCQ(unit, btn) {
+  currentMCQFilter = unit;
+  document.querySelectorAll('#mcq-filters .filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderMCQ();
+}
+
+function renderTheory() {
+  const list = document.getElementById('theory-list');
+  const data = currentTheoryFilter==='all' ? THEORY_DATA : THEORY_DATA.filter(q=>q.u===currentTheoryFilter);
+  if(data.length===0){list.innerHTML='<div class="empty">No questions for this unit.</div>';return;}
+  list.innerHTML = data.map((q,gi) => {
+    const i = THEORY_DATA.indexOf(q);
+    return `<div class="theory-card">
+      <div class="q-meta"><span class="unit-tag">${q.u}</span><span class="marks-pill">${q.marks} marks</span><span class="bl-tag">${q.bl}</span></div>
+      <div class="theory-q">${q.q}</div>
+      <button class="show-ans-btn" onclick="toggleAns(${i},this)">Show answer</button>
+      <div class="answer-box" id="tans-${i}">${q.ans}</div>
+    </div>`;
+  }).join('');
+}
+
+function toggleAns(i, btn) {
+  const box = document.getElementById('tans-'+i);
+  const shown = box.style.display === 'block';
+  box.style.display = shown ? 'none' : 'block';
+  btn.textContent = shown ? 'Show answer' : 'Hide answer';
+}
+
+function filterTheory(unit, btn) {
+  currentTheoryFilter = unit;
+  document.querySelectorAll('#theory-filters .filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderTheory();
+}
+</script>
