@@ -1,0 +1,963 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);color:var(--color-text-primary);background:transparent}
+.wrap{padding:0.5rem 0}
+.unit-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.5rem}
+.utab{padding:7px 14px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);font-size:13px;cursor:pointer;background:var(--color-background-primary);color:var(--color-text-secondary);transition:all 0.15s;font-weight:400}
+.utab:hover:not(.active){background:var(--color-background-secondary)}
+.unit-panel{display:none}
+.unit-panel.active{display:block}
+.q-selector{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.25rem}
+.qbtn{padding:5px 12px;border:0.5px solid var(--color-border-secondary);border-radius:99px;font-size:12px;cursor:pointer;background:transparent;color:var(--color-text-secondary);transition:all 0.15s}
+.qbtn:hover:not(.aq){background:var(--color-background-secondary)}
+.ans-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.25rem;display:none}
+.ans-card.visible{display:block}
+.ans-header{display:flex;align-items:flex-start;gap:10px;margin-bottom:1rem;padding-bottom:0.75rem;border-bottom:0.5px solid var(--color-border-tertiary)}
+.unit-pill{font-size:11px;padding:3px 9px;border-radius:99px;font-weight:500;flex-shrink:0;margin-top:2px}
+.ans-title{font-size:15px;font-weight:500;line-height:1.4;color:var(--color-text-primary)}
+.marks-tag{font-size:11px;padding:3px 8px;border-radius:4px;background:#FBEAF0;color:#72243E;font-weight:500;flex-shrink:0;margin-top:2px}
+.point-block{margin-bottom:1rem}
+.point-head{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.num-badge{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;flex-shrink:0}
+.point-text{font-size:13px;color:var(--color-text-secondary);line-height:1.7;padding-left:26px}
+.sub-list{list-style:none;padding-left:26px;margin-top:4px;display:flex;flex-direction:column;gap:3px}
+.sub-list li{font-size:13px;color:var(--color-text-secondary);padding-left:12px;position:relative;line-height:1.6}
+.sub-list li::before{content:"→";position:absolute;left:0;color:#7F77DD;font-size:12px}
+.diagram-wrap{margin:1rem 0;background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:1rem;border:0.5px solid var(--color-border-tertiary)}
+.diag-label{font-size:11px;color:var(--color-text-tertiary);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em}
+svg{display:block;width:100%;height:auto}
+.tip-box{background:#EEEDFE;border-radius:var(--border-radius-md);padding:10px 14px;margin-top:1rem;border-left:3px solid #7F77DD;border-radius:0}
+.tip-text{font-size:12px;color:#3C3489;line-height:1.6}
+.divider{height:0.5px;background:var(--color-border-tertiary);margin:1rem 0}
+</style>
+
+<div class="wrap">
+<h2 class="sr-only">NCER BTMEC801F — Unit-wise 6-mark long answer guide with diagrams</h2>
+
+<div style="margin-bottom:1.25rem">
+  <div style="font-size:18px;font-weight:500;margin-bottom:4px">Unit-wise long answer guide</div>
+  <div style="font-size:13px;color:var(--color-text-secondary)">Each unit · 2 top questions · 6 marks each · with diagram + easy points</div>
+</div>
+
+<div class="unit-tabs">
+  <button class="utab active" onclick="showUnit(0,this)" style="background:#EEEDFE;color:#3C3489;border-color:#AFA9EC">Unit 1 — Solar cells</button>
+  <button class="utab" onclick="showUnit(1,this)">Unit 2 — Solar thermal</button>
+  <button class="utab" onclick="showUnit(2,this)">Unit 3 — Wind & OTEC</button>
+  <button class="utab" onclick="showUnit(3,this)">Unit 4 — Biomass & Geo</button>
+  <button class="utab" onclick="showUnit(4,this)">Unit 5 — Batteries & Fuel cells</button>
+  <button class="utab" onclick="showUnit(5,this)">Unit 6 — MHD & Storage</button>
+</div>
+
+<div id="unit-0" class="unit-panel active">
+  <div class="q-selector">
+    <button class="qbtn aq" onclick="showQ('u0',0,this)" style="background:#EEEDFE;color:#3C3489;border-color:#AFA9EC">Q1: Solar cell working</button>
+    <button class="qbtn" onclick="showQ('u0',1,this)">Q2: PV water pumping system</button>
+  </div>
+  <div id="u0-0" class="ans-card visible">
+    <div class="ans-header">
+      <span class="unit-pill" style="background:#EEEDFE;color:#3C3489">Unit 1</span>
+      <div class="ans-title">What is a solar cell? Explain its working principle with neat sketch.</div>
+      <span class="marks-tag">6 marks</span>
+    </div>
+    <div class="point-block">
+      <div class="point-head"><span class="num-badge" style="background:#EEEDFE;color:#3C3489">1</span>Definition</div>
+      <div class="point-text">A solar cell (photovoltaic cell) is a semiconductor device that converts sunlight directly into DC electricity using the photovoltaic effect — no moving parts, no fuel, no emissions.</div>
+    </div>
+    <div class="point-block">
+      <div class="point-head"><span class="num-badge" style="background:#EEEDFE;color:#3C3489">2</span>Construction</div>
+      <ul class="sub-list">
+        <li>Top layer: n-type silicon (extra electrons)</li>
+        <li>Bottom layer: p-type silicon (extra holes)</li>
+        <li>p-n junction forms at the boundary — creates a built-in electric field</li>
+        <li>Anti-reflection coating on top to absorb max light</li>
+        <li>Metal contacts (silver grid on top, aluminium on back) to collect current</li>
+      </ul>
+    </div>
+    <div class="diagram-wrap">
+      <div class="diag-label">Solar cell — cross section diagram</div>
+      <svg viewBox="0 0 580 210" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="arr" markerWidth="7" markerHeight="7" refX="3" refY="3.5" orient="auto"><polygon points="0 0,7 3.5,0 7" fill="#378ADD"/></marker></defs>
+        <line x1="60" y1="30" x2="60" y2="10" stroke="#EF9F27" stroke-width="1.5" marker-end="url(#arr)"/>
+        <line x1="100" y1="30" x2="100" y2="10" stroke="#EF9F27" stroke-width="1.5" marker-end="url(#arr)"/>
+        <line x1="140" y1="30" x2="140" y2="10" stroke="#EF9F27" stroke-width="1.5" marker-end="url(#arr)"/>
+        <line x1="180" y1="30" x2="180" y2="10" stroke="#EF9F27" stroke-width="1.5" marker-end="url(#arr)"/>
+        <line x1="220" y1="30" x2="220" y2="10" stroke="#EF9F27" stroke-width="1.5" marker-end="url(#arr)"/>
+        <text x="280" y="14" font-size="12" fill="#854F0B" text-anchor="middle" font-family="var(--font-sans)">Sunlight (photons)</text>
+        <rect x="30" y="35" width="330" height="14" fill="#D3D1C7" rx="2"/>
+        <text x="195" y="46" font-size="11" fill="#444441" text-anchor="middle" font-family="var(--font-sans)">Anti-reflection coating</text>
+        <rect x="30" y="52" width="330" height="8" rx="1" fill="#B5D4F4"/>
+        <text x="195" y="60" font-size="10" fill="#0C447C" text-anchor="middle" font-family="var(--font-sans)">Metal grid contacts (top)</text>
+        <rect x="30" y="63" width="330" height="42" fill="#85B7EB" rx="2"/>
+        <text x="195" y="89" font-size="13" fill="#042C53" text-anchor="middle" font-family="var(--font-sans)" font-weight="500">n-type silicon (−)</text>
+        <rect x="30" y="108" width="330" height="42" fill="#9FE1CB" rx="2"/>
+        <text x="195" y="134" font-size="13" fill="#085041" text-anchor="middle" font-family="var(--font-sans)" font-weight="500">p-type silicon (+)</text>
+        <line x1="30" y1="108" x2="360" y2="108" stroke="#1D9E75" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="375" y="112" font-size="11" fill="#0F6E56" font-family="var(--font-sans)">p-n junction</text>
+        <rect x="30" y="153" width="330" height="10" fill="#888780" rx="2"/>
+        <text x="195" y="162" font-size="10" fill="#2C2C2A" text-anchor="middle" font-family="var(--font-sans)">Aluminium back contact</text>
+        <rect x="30" y="165" width="330" height="12" fill="#D3D1C7" rx="2"/>
+        <text x="195" y="175" font-size="10" fill="#444441" text-anchor="middle" font-family="var(--font-sans)">Insulating base / encapsulant</text>
+        <line x1="370" y1="60" x2="430" y2="60" stroke="#378ADD" stroke-width="1.5"/>
+        <line x1="430" y1="60" x2="430" y2="170" stroke="#378ADD" stroke-width="1.5"/>
+        <line x1="430" y1="170" x2="370" y2="170" stroke="#378ADD" stroke-width="1.5"/>
+        <circle cx="480" cy="115" r="18" fill="none" stroke="#378ADD" stroke-width="1.5"/>
+        <text x="480" y="120" font-size="13" fill="#185FA5" text-anchor="middle" font-family="var(--font-sans)">Load</text>
+        <line x1="430" y1="60" x2="462" y2="97" stroke="#378ADD" stroke-width="1.5"/>
+        <line x1="430" y1="170" x2="462" y2="133" stroke="#378ADD" stroke-width="1.5"/>
+        <text x="415" y="50" font-size="10" fill="#185FA5" font-family="var(--font-sans)">e−</text>
+        <text x="540" y="120" font-size="11" fill="#185FA5" font-family="var(--font-sans)">DC out</text>
+      </svg>
+    </div>
+    <div class="point-block">
+      <div class="point-head"><span class="num-badge" style="background:#EEEDFE;color:#3C3489">3</span>Working principle (step-by-step)</div>
+      <ul class="sub-list">
+        <li>Photons from sunlight strike the n-type layer</li>
+        <li>Photons with energy ≥ band gap excite electrons → generate electron-hole pairs</li>
+        <li>Built-in electric field at p-n junction separates charges: electrons go to n-side, holes to p-side</li>
+        <li>Electrons flow through external circuit → electric current (DC) is produced</li>
+        <li>This is called the photovoltaic (PV) effect</li>
+      </ul>
+    </div>
+    <div class="point-block">
+      <div class="point-head"><span class="num-badge" style="background:#EEEDFE;color:#3C3489">4</span>Key parameters</div>
+      <ul class="sub-list">
+        <li>Voc = open circuit voltage (~0.5–0.6 V per cell)</li>
+        <li>Isc = short circuit current</li>
+        <li>Fill Factor (FF) = measure of quality</li>
+        <li>Efficiency = 15–22% (commercial mono-Si)</li>
+      </ul>
+    </div>
+    <div class="point-block">
+      <div class="point-head"><span class="num-badge" style="background:#EEEDFE;color:#3C3489">5</span>Materials used</div>
+      <ul class="sub-list">
+        <li>Mono-crystalline silicon — highest efficiency</li>
+        <li>Poly-crystalline silicon — lower cost</li>
+        <li>Thin film (CdTe, CIGS, Amorphous Si) — flexible, low cost</li>
+      </ul>
+    </div>
+    <div class="point-block">
+      <div class="point-head"><span class="num-badge" style="background:#EEEDFE;color:#3C3489">6</span>Advantages & limitations</div>
+      <ul class="sub-list">
+        <li>Advantages: no fuel, no emissions, long life (25+ years), silent</li>
+        <li>Limitations: works only in daylight, high initial cost, efficiency drops in heat</li>
+      </ul>
+    </div>
+    <div class="tip-box"><div class="tip-text">Exam tip: Always draw the cross-section showing n-type (top), p-n junction (dashed), p-type (bottom), external load circuit. Label: anti-reflection coating, metal contacts, electron flow direction.</div></div>
+  </div>
+
+  <div id="u0-1" class="ans-card">
+    <div class="ans-header">
+      <span class="unit-pill" style="background:#EEEDFE;color:#3C3489">Unit 1</span>
+      <div class="ans-title">Explain photovoltaic (PV) water pumping system with neat sketch.</div>
+      <span class="marks-tag">6 marks</span>
+    </div>
+    <div class="point-block">
+      <div class="point-head"><span class="num-badge" style="background:#EEEDFE;color:#3C3489">1</span>Definition</div>
+      <div class="point-text">A PV water pumping system uses solar panels to generate DC electricity which drives an electric motor-pump to lift or transfer water — used for irrigation, drinking water in rural/remote areas.</div>
+    </div>
+    <div class="diagram-wrap">
+      <div class="diag-label">PV water pumping system — block diagram</div>
+      <svg viewBox="0 0 580 160" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="ar2" markerWidth="7" markerHeight="7" refX="3" refY="3.5" orient="auto"><polygon points="0 0,7 3.5,0 7" fill="#378ADD"/></marker></defs>
+        <rect x="10" y="55" width="90" height="50" rx="4" fill="#FAEEDA" stroke="#EF9F27" stroke-width="0.8"/>
+        <text x="55" y="76" font-size="11" fill="#633806" text-anchor="middle" font-family="var(--font-sans)" font-weight="500">PV Array</text>
+        <text x="55" y="90" font-size="10" fill="#854F0B" text-anchor="middle" font-family="var(--font-sans)">(Solar panels)</text>
+        <text x="55" y="103" font-size="10" fill="#854F0B" text-anchor="middle" font-family="var(--font-sans)">DC output</text>
+        <line x1="100" y1="80" x2="125" y2="80" stroke="#378ADD" stroke-width="1.5" marker-end="url(#ar2)"/>
+        <rect x="125" y="55" width="90" height="50" rx="4" fill="#E6F1FB" stroke="#378ADD" stroke-width="0.8"/>
+        <text x="170" y="76" font-size="11" fill="#042C53" text-anchor="middle" font-family="var(--font-sans)" font-weight="500">PCU / MPPT</text>
+        <text x="170" y="90" font-size="10" fill="#185FA5" text-anchor="middle" font-family="var(--font-sans)">(Controls voltage,</text>
+        <text x="170" y="103" font-size="10" fill="#185FA5" text-anchor="middle" font-family="var(--font-sans)">DC→AC if needed)</text>
+        <line x1="215" y1="80" x2="240" y2="80" stroke="#378ADD" stroke-width="1.5" marker-end="url(#ar2)"/>
+        <rect x="240" y="55" width="80" height="50" rx="4" fill="#EEEDFE" stroke="#7F77DD" stroke-width="0.8"/>
+        <text x="280" y="80" font-size="11" fill="#3C3489" text-anchor="middle" font-family="var(--font-sans)" font-weight="500">Motor</text>
+        <text x="280" y="95" font-size="10" fill="#534AB7" text-anchor="middle" font-family="var(--font-sans)">(AC/DC)</text>
+        <line x1="320" y1="80" x2="345" y2="80" stroke="#378ADD" stroke-width="1.5" marker-end="url(#ar2)"/>
+        <rect x="345" y="55" width="80" height="50" rx="4" fill="#E1F5EE" stroke="#1D9E75" stroke-width="0.8"/>
+        <text x="385" y="80" font-size="11" fill="#085041" text-anchor="middle" font-family="var(--font-sans)" font-weight="500">Pump</text>
+        <text x="385" y="95" font-size="10" fill="#0F6E56" text-anchor="middle" font-family="var(--font-sans)">(centrifugal)</text>
+        <line x1="425" y1="80" x2="450" y2="80" stroke="#378ADD" stroke-width="1.5" marker-end="url(#ar2)"/>
+        <rect x="450" y="40" width="90" height="40" rx="4" fill="#E6F1FB" stroke="#378ADD" stroke-width="0.8"/>
+        <text x="495" y="62" font-size="11" fill="#042C53" text-anchor="middle" font-family="var(--font-sans)" font-weight="500">Storage Tank</text>
+        <rect x="455" y="100" width="80" height="18" rx="3" fill="#B5D4F4" stroke="#378ADD" stroke-width="0.5"/>
+        <text x="495" y="113" font-size="10" fill="#042C53" text-anchor="middle" font-family="var(--font-sans)">Water source (well)</text>
+        <line x1="495" y1="100" x2="425" y2="100" stroke="#378ADD" stroke-width="1" stroke-dasharray="3,2"/>
+        <line x1="425" y1="100" x2="425" y2="80" stroke="#378ADD" stroke-width="1" stroke-dasharray="3,2"/>
+        <text x="290" y="145" font-size="10" fill="#888780" text-anchor="middle" font-family="var(--font-sans)">Solar energy → DC power → Motor → Pump → Water lifted</text>
+      </svg>
+    </div>
+    <div class="point-block">
+      <div class="point-head"><span class="num-badge" style="background:#EEEDFE;color:#3C3489">2</span>Main components</div>
+      <ul class="sub-list">
+        <li>PV array — converts sunlight to DC electricity</li>
+        <li>PCU (Power Conditioning Unit) / MPPT — optimizes and converts power (DC to AC if needed)</li>
+        <li>Electric motor — AC or DC type</li>
+        <li>Centrifugal pump — lifts water from source</li>
+        <li>Water storage tank — stores pumped water for use at night</li>
+        <li>Sensors and controls — for automatic ON/OFF</li>
+      </ul>
+    </div>
+    <div class="point-block">
+      <div class="point-head"><span class="num-badge" style="background:#EEEDFE;color:#3C3489">3</span>Working</div>
+      <ul class="sub-list">
+        <li>Sunlight falls on PV array → DC electricity generated</li>
+        <li>PCU controls voltage and converts DC to AC (if AC motor used)</li>
+        <li>Motor converts electrical energy to mechanical energy</li>
+        <li>Pump is driven by motor → water is lifted from well/reservoir to tank</li>
+        <li>System works only during daylight hours (no battery needed if tank is large enough)</li>
+      </ul>
+    </div>
+    <div class="point-block">
+      <div class="point-head"><span class="num-badge" style="background:#EEEDFE;color:#3C3489">4</span>Types</div>
+      <ul class="sub-list">
+        <li>Surface pump — water source near surface (≤ 7m)</li>
+        <li>Submersible pump — motor and pump submerged in deep well</li>
+      </ul>
+    </div>
+    <div class="point-block">
+      <div class="point-head"><span class="num-badge" style="background:#EEEDFE;color:#3C3489">5</span>Advantages</div>
+      <ul class="sub-list">
+        <li>No fuel cost, zero emissions</li>
+        <li>Ideal for remote, off-grid areas</li>
+        <li>Low maintenance, long life</li>
+        <li>KUSUM scheme (India) subsidizes these systems</li>
+      </ul>
+    </div>
+    <div class="point-block">
+      <div class="point-head"><span class="num-badge" style="background:#EEEDFE;color:#3C3489">6</span>Limitations</div>
+      <ul class="sub-list">
+        <li>Works only in daytime / sufficient sunlight</li>
+        <li>High initial cost</li>
+        <li>Output varies with cloud cover</li>
+      </ul>
+    </div>
+    <div class="tip-box"><div class="tip-text">Exam tip: Draw block diagram with 5 boxes: PV Array → PCU → Motor → Pump → Tank. Draw arrows showing energy/water flow. Label each component's function below.</div></div>
+  </div>
+</div>
+
+<div id="unit-1" class="unit-panel">
+  <div class="q-selector">
+    <button class="qbtn aq" onclick="showQ('u1',0,this)" style="background:#EEEDFE;color:#3C3489;border-color:#AFA9EC">Q1: Flat plate collector</button>
+    <button class="qbtn" onclick="showQ('u1',1,this)">Q2: Solar radiation terms</button>
+  </div>
+  <div id="u1-0" class="ans-card visible">
+    <div class="ans-header">
+      <span class="unit-pill" style="background:#E1F5EE;color:#085041">Unit 2</span>
+      <div class="ans-title">Explain solar flat plate collector as solar air heater with neat sketch.</div>
+      <span class="marks-tag">6 marks</span>
+    </div>
+    <div class="point-block">
+      <div class="point-head"><span class="num-badge" style="background:#E1F5EE;color:#085041">1</span>Definition</div>
+      <div class="point-text">A flat plate collector (FPC) is a device that absorbs solar radiation and transfers the heat to a working fluid (air or water). In solar air heaters, air is the working fluid — no pumping liquid required.</div>
+    </div>
+    <div class="diagram-wrap">
+      <div class="diag-label">Solar flat plate collector (air heater) — cross section</div>
+      <svg viewBox="0 0 580 200" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="ar3" markerWidth="7" markerHeight="7" refX="3" refY="3.5" orient="auto"><polygon points="0 0,7 3.5,0 7" fill="#EF9F27"/></marker><marker id="ar4" markerWidth="7" markerHeight="7" refX="3" refY="3.5" orient="auto"><polygon points="0 0,7 3.5,0 7" fill="#1D9E75"/></marker></defs>
+        <line x1="80" y1="28" x2="80" y2="10" stroke="#EF9F27" stroke-width="1.5" marker-end="url(#ar3)"/>
+        <line x1="130" y1="28" x2="130" y2="10" stroke="#EF9F27" stroke-width="1.5" marker-end="url(#ar3)"/>
+        <line x1="180" y1="28" x2="180" y2="10" stroke="#EF9F27" stroke-width="1.5" marker-end="url(#ar3)"/>
+        <line x1="230" y1="28" x2="230" y2="10" stroke="#EF9F27" stroke-width="1.5" marker-end="url(#ar3)"/>
+        <text x="310" y="14" font-size="11" fill="#854F0B" font-family="var(--font-sans)">Solar radiation</text>
+        <rect x="40" y="30" width="310" height="18" rx="2" fill="#B5D4F4" stroke="#378ADD" stroke-width="0.8"/>
+        <text x="195" y="43" font-size="11" fill="#042C53" text-anchor="middle" font-family="var(--font-sans)">Glass cover (transparent) — lets radiation in, traps heat</text>
+        <rect x="40" y="50" width="310" height="28" rx="2" fill="#444441"/>
+        <text x="195" y="69" font-size="11" fill="#D3D1C7" text-anchor="middle" font-family="var(--font-sans)">Absorber plate (blackened metal — absorbs max radiation)</text>
+        <rect x="40" y="80" width="310" height="45" rx="2" fill="#E6F1FB" stroke="#85B7EB" stroke-width="0.5"/>
+        <text x="195" y="107" font-size="12" fill="#185FA5" text-anchor="middle" font-family="var(--font-sans)">Air channel — air flows here, gets heated</text>
+        <line x1="40" y1="102" x2="350" y2="102" stroke="#85B7EB" stroke-width="0.5" stroke-dasharray="4,3"/>
+        <line x1="40" y1="125" x2="350" y2="125" stroke="#85B7EB" stroke-width="0" />
+        <rect x="40" y="125" width="310" height="25" rx="2" fill="#D3D1C7"/>
+        <text x="195" y="141" font-size="11" fill="#444441" text-anchor="middle" font-family="var(--font-sans)">Insulation (rock wool / glass wool) — prevents heat loss</text>
+        <rect x="40" y="150" width="310" height="14" rx="2" fill="#888780"/>
+        <text x="195" y="161" font-size="10" fill="#F1EFE8" text-anchor="middle" font-family="var(--font-sans)">Metal casing / frame</text>
+        <line x1="10" y1="102" x2="38" y2="102" stroke="#1D9E75" stroke-width="2" marker-end="url(#ar4)"/>
+        <text x="5" y="97" font-size="10" fill="#0F6E56" font-family="var(--font-sans)">Cold</text>
+        <text x="5" y="109" font-size="10" fill="#0F6E56" font-family="var(--font-sans)">air in</text>
+        <line x1="352" y1="102" x2="390" y2="102" stroke="#E24B4A" stroke-width="2" marker-end="url(#ar4)"/>
+        <text x="395" y="97" font-size="10" fill="#791F1F" font-family="var(--font-sans)">Hot</text>
+        <text x="395" y="109" font-size="10" fill="#791F1F" font-family="var(--font-sans)">air out</text>
+        <text x="195" y="185" font-size="10" fill="#888780" text-anchor="middle" font-family="var(--font-sans)">Collector tilted toward sun for maximum radiation capture</text>
+      </svg>
+    </div>
+    <div class="point-block">
+      <div class="point-head"><span class="num-badge" style="background:#E1F5EE;color:#085041">2</span>Main parts</div>
+      <ul class="sub-list">
+        <li>Transparent cover (glass): allows solar radiation in, reduces convection heat loss (greenhouse effect)</li>
+        <li>Absorber plate: blackened metal (copper/aluminium) — absorbs max solar radiation</li>
+        <li>Air channel / duct: space where cold air enters and hot air exits</li>
+        <li>Insulation: glass wool / rock wool at bottom and sides — reduces heat loss</li>
+        <li>Metal casing: structural support frame</li>
+      </ul>
+    </div>
+    <div class="point-block">
+      <div class="point-head"><span class="num-badge" style="background:#E1F5EE;color:#085041">3</span>Working (step-by-step)</div>
+      <ul class="sub-list">
+        <li>Solar radiation passes through the glass cover</li>
+        <li>Blackened absorber plate absorbs radiation → temperature rises</li>
+        <li>Cold air enters from one end of the air channel</li>
+        <li>Air gets heated by convection from the hot absorber plate</li>
+        <li>Hot air exits from other end and is used for application</li>
+        <li>Glass cover traps heat inside (like a greenhouse)</li>
+      </ul>
+    </div>
+    <div class="point-block">
+      <div class="point-head"><span class="num-badge" style="background:#E1F5EE;color:#085041">4</span>Performance factors</div>
+      <ul class="sub-list">
+        <li>Solar intensity and collector tilt angle</li>
+        <li>Absorptivity of absorber plate (should be close to 1)</li>
+        <li>Air flow rate through the channel</li>
+        <li>Quality and thickness of insulation</li>
+        <li>Number of glass covers (double glass = less heat loss)</li>
+      </ul>
+    </div>
+    <div class="point-block">
+      <div class="point-head"><span class="num-badge" style="background:#E1F5EE;color:#085041">5</span>Applications</div>
+      <ul class="sub-list">
+        <li>Crop drying (paddy, spices, fruits)</li>
+        <li>Space heating in buildings</li>
+        <li>Industrial process heat (low temperature)</li>
+        <li>Timber drying, textile drying</li>
+      </ul>
+    </div>
+    <div class="point-block">
+      <div class="point-head"><span class="num-badge" style="background:#E1F5EE;color:#085041">6</span>Advantages & limitations</div>
+      <ul class="sub-list">
+        <li>Advantages: simple, no moving parts, low maintenance, cheap</li>
+        <li>Limitations: works only in daytime, low temperature range (40–80°C), needs large area</li>
+      </ul>
+    </div>
+    <div class="tip-box"><div class="tip-text">Exam tip: Draw cross-section clearly. Show 5 layers: glass → absorber (black) → air channel → insulation → casing. Draw arrows for cold air in (left), hot air out (right), sun rays coming from top.</div></div>
+  </div>
+  <div id="u1-1" class="ans-card">
+    <div class="ans-header">
+      <span class="unit-pill" style="background:#E1F5EE;color:#085041">Unit 2</span>
+      <div class="ans-title">Explain: Solar constant, Solar spectrum, Clarity index, Declination angle, Zenith angle, Day length hours.</div>
+      <span class="marks-tag">6 marks</span>
+    </div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#E1F5EE;color:#085041">1</span>Solar constant (Isc)</div><div class="point-text">Average solar radiation received per unit area at Earth's mean orbital distance from the sun = 1367 W/m². It remains nearly constant throughout the year (varies ±3% due to Earth's elliptical orbit).</div></div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#E1F5EE;color:#085041">2</span>Solar spectrum</div><div class="point-text">Distribution of solar energy with wavelength. Three regions: UV (&lt;400 nm) = 9%, Visible (400–700 nm) = 47%, Infrared (&gt;700 nm) = 44%. Peak emission near 500 nm (green light).</div></div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#E1F5EE;color:#085041">3</span>Clarity index (Kt)</div><div class="point-text">Ratio of global horizontal solar radiation (H) to extraterrestrial radiation (H₀) on horizontal surface. Kt = H / H₀. Value 0 to 1. Higher Kt = clearer sky = more solar energy received at ground.</div></div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#E1F5EE;color:#085041">4</span>Declination angle (δ)</div><div class="point-text">Angle between the sun's rays and the equatorial plane. Ranges from +23.45° (June 21, summer solstice) to −23.45° (Dec 21, winter solstice). Formula: δ = 23.45 × sin[360/365 × (284 + n)]°, where n = day number.</div></div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#E1F5EE;color:#085041">5</span>Zenith angle (θz)</div><div class="point-text">Angle between the direction of the sun and the vertical (directly overhead = zenith). θz = 0° means sun is directly overhead. θz = 90° means sun is at horizon (sunrise/sunset). cos θz = sin φ sin δ + cos φ cos δ cos ω, where φ = latitude, ω = hour angle.</div></div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#E1F5EE;color:#085041">6</span>Day length (N)</div><div class="point-text">Duration of sunshine from sunrise to sunset. Formula: N = (2/15) × cos⁻¹(−tan φ × tan δ) hours. On equinox days N = 12 hours everywhere. Longer in summer, shorter in winter (in higher latitudes).</div></div>
+    <div class="tip-box"><div class="tip-text">Exam tip: This is a 6-mark definitions question — write 1 short definition + formula for each term. Draw a simple earth-sun diagram showing declination angle and zenith angle on it.</div></div>
+  </div>
+</div>
+
+<div id="unit-2" class="unit-panel">
+  <div class="q-selector">
+    <button class="qbtn aq" onclick="showQ('u2',0,this)" style="background:#EEEDFE;color:#3C3489;border-color:#AFA9EC">Q1: Wind energy & Betz limit</button>
+    <button class="qbtn" onclick="showQ('u2',1,this)">Q2: OTEC open cycle</button>
+  </div>
+  <div id="u2-0" class="ans-card visible">
+    <div class="ans-header">
+      <span class="unit-pill" style="background:#FAEEDA;color:#633806">Unit 3</span>
+      <div class="ans-title">Derive power developed by wind. Define Betz limit. Explain HAWT with sketch.</div>
+      <span class="marks-tag">6 marks</span>
+    </div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#FAEEDA;color:#633806">1</span>Power in wind — derivation</div>
+    <ul class="sub-list">
+      <li>Consider air of density ρ (kg/m³), velocity V (m/s), swept area A (m²)</li>
+      <li>Mass flow rate: ṁ = ρ × A × V (kg/s)</li>
+      <li>Kinetic energy of wind = ½ × ṁ × V² = ½ × ρAV × V²</li>
+      <li>Power available in wind: P = ½ ρ A V³ (watts)</li>
+      <li>Key insight: P ∝ V³ — doubling wind speed → 8× more power</li>
+      <li>P ∝ A — larger rotor = more power</li>
+    </ul></div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#FAEEDA;color:#633806">2</span>Betz limit</div>
+    <div class="point-text">A wind turbine cannot extract 100% of wind energy — air must keep moving to leave the rotor area. Maximum theoretical efficiency = 16/27 ≈ 59.3% (Betz limit). Achieved when downstream velocity = V/3. Practical turbines achieve 35–45%.</div></div>
+    <div class="diagram-wrap">
+      <div class="diag-label">Horizontal axis wind turbine (HAWT) — labeled diagram</div>
+      <svg viewBox="0 0 580 200" xmlns="http://www.w3.org/2000/svg">
+        <rect x="270" y="120" width="18" height="75" rx="3" fill="#888780"/>
+        <text x="279" y="192" font-size="10" fill="#444441" text-anchor="middle" font-family="var(--font-sans)">Tower</text>
+        <circle cx="279" cy="118" r="10" fill="#D3D1C7" stroke="#888780" stroke-width="1"/>
+        <text x="279" y="122" font-size="9" fill="#444441" text-anchor="middle" font-family="var(--font-sans)">Hub</text>
+        <rect x="267" y="90" width="24" height="28" rx="3" fill="#B4B2A9" stroke="#888780" stroke-width="0.8"/>
+        <text x="279" y="108" font-size="9" fill="#2C2C2A" text-anchor="middle" font-family="var(--font-sans)">Nacelle</text>
+        <text x="279" y="118" font-size="8" fill="#444441" text-anchor="middle" font-family="var(--font-sans)">(gen.)</text>
+        <line x1="279" y1="100" x2="279" y2="30" stroke="#888780" stroke-width="3" stroke-linecap="round"/>
+        <line x1="279" y1="100" x2="220" y2="140" stroke="#888780" stroke-width="3" stroke-linecap="round"/>
+        <line x1="279" y1="100" x2="338" y2="140" stroke="#888780" stroke-width="3" stroke-linecap="round"/>
+        <text x="279" y="22" font-size="10" fill="#444441" text-anchor="middle" font-family="var(--font-sans)">Blade 1</text>
+        <text x="208" y="155" font-size="10" fill="#444441" text-anchor="middle" font-family="var(--font-sans)">Blade 2</text>
+        <text x="350" y="155" font-size="10" fill="#444441" text-anchor="middle" font-family="var(--font-sans)">Blade 3</text>
+        <line x1="60" y1="100" x2="200" y2="100" stroke="#1D9E75" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <line x1="380" y1="100" x2="500" y2="100" stroke="#1D9E75" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <text x="100" y="90" font-size="11" fill="#0F6E56" font-family="var(--font-sans)">Wind →</text>
+        <text x="100" y="103" font-size="10" fill="#0F6E56" font-family="var(--font-sans)">V = cut-in to</text>
+        <text x="100" y="115" font-size="10" fill="#0F6E56" font-family="var(--font-sans)">rated speed</text>
+        <text x="420" y="88" font-size="10" fill="#854F0B" font-family="var(--font-sans)">Power out</text>
+        <text x="420" y="100" font-size="10" fill="#854F0B" font-family="var(--font-sans)">to grid</text>
+        <text x="420" y="112" font-size="10" fill="#854F0B" font-family="var(--font-sans)">(via generator)</text>
+        <text x="279" y="175" font-size="10" fill="#5F5E5A" text-anchor="middle" font-family="var(--font-sans)">Foundation / Ground</text>
+        <line x1="60" y1="178" x2="520" y2="178" stroke="#888780" stroke-width="1.5"/>
+      </svg>
+    </div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#FAEEDA;color:#633806">3</span>Key wind machine parameters</div>
+    <ul class="sub-list">
+      <li>Cut-in speed: minimum wind speed to start generating power (~3–4 m/s)</li>
+      <li>Rated speed: wind speed at which rated (maximum) power is produced (~12–15 m/s)</li>
+      <li>Cut-out speed: wind speed at which turbine is shut down for safety (~25 m/s)</li>
+      <li>Tip speed ratio (λ): ratio of blade tip speed to wind speed. Optimal λ = 6–8 for HAWT</li>
+    </ul></div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#FAEEDA;color:#633806">4</span>Types of rotors</div>
+    <ul class="sub-list">
+      <li>HAWT (Horizontal axis): blades rotate in vertical plane, axis horizontal. Most common (3-blade propeller type)</li>
+      <li>VAWT (Vertical axis): Savonius, Darrieus types. Axis vertical. Work in any wind direction</li>
+      <li>HAWT advantages: higher efficiency, better at extracting energy</li>
+    </ul></div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#FAEEDA;color:#633806">5</span>Site selection for wind farm</div>
+    <ul class="sub-list">
+      <li>Average wind speed ≥ 6 m/s annually</li>
+      <li>Open terrain — coastal, hills, plains</li>
+      <li>Away from buildings and obstructions</li>
+      <li>India: Tamil Nadu, Gujarat, Rajasthan are top wind states</li>
+    </ul></div>
+    <div class="tip-box"><div class="tip-text">Exam tip: Write P = ½ρAV³ formula clearly in derivation. Betz limit = 59.3% must be mentioned. Draw 3-blade HAWT with nacelle, hub, tower, foundation labelled.</div></div>
+  </div>
+  <div id="u2-1" class="ans-card">
+    <div class="ans-header">
+      <span class="unit-pill" style="background:#FAEEDA;color:#633806">Unit 3</span>
+      <div class="ans-title">What is OTEC? Explain open cycle OTEC with neat sketch.</div>
+      <span class="marks-tag">6 marks</span>
+    </div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#FAEEDA;color:#633806">1</span>Definition</div><div class="point-text">OTEC (Ocean Thermal Energy Conversion) is a system that generates electricity using the temperature difference between warm surface ocean water (~25–28°C) and cold deep ocean water (~4–5°C). Minimum ΔT required = 20°C.</div></div>
+    <div class="diagram-wrap">
+      <div class="diag-label">Open cycle OTEC — schematic</div>
+      <svg viewBox="0 0 580 200" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="ar5" markerWidth="7" markerHeight="7" refX="3" refY="3.5" orient="auto"><polygon points="0 0,7 3.5,0 7" fill="#378ADD"/></marker></defs>
+        <rect x="10" y="140" width="560" height="55" rx="4" fill="#B5D4F4" opacity="0.5"/>
+        <text x="290" y="172" font-size="11" fill="#042C53" text-anchor="middle" font-family="var(--font-sans)">Ocean (warm surface water ~26°C at top, cold deep water ~4°C at 1000m depth)</text>
+        <rect x="30" y="40" width="100" height="90" rx="4" fill="#FAEEDA" stroke="#EF9F27" stroke-width="0.8"/>
+        <text x="80" y="78" font-size="11" fill="#633806" text-anchor="middle" font-family="var(--font-sans)" font-weight="500">Flash</text>
+        <text x="80" y="92" font-size="11" fill="#633806" text-anchor="middle" font-family="var(--font-sans)" font-weight="500">Evaporator</text>
+        <text x="80" y="106" font-size="10" fill="#854F0B" text-anchor="middle" font-family="var(--font-sans)">(low vacuum)</text>
+        <line x1="80" y1="130" x2="80" y2="140" stroke="#378ADD" stroke-width="1.5" marker-end="url(#ar5)"/>
+        <text x="30" y="22" font-size="10" fill="#854F0B" font-family="var(--font-sans)">Warm water in</text>
+        <line x1="80" y1="30" x2="80" y2="40" stroke="#E24B4A" stroke-width="1.5" marker-end="url(#ar5)"/>
+        <rect x="160" y="25" width="100" height="75" rx="4" fill="#EEEDFE" stroke="#7F77DD" stroke-width="0.8"/>
+        <text x="210" y="58" font-size="11" fill="#3C3489" text-anchor="middle" font-family="var(--font-sans)" font-weight="500">Low-pressure</text>
+        <text x="210" y="72" font-size="11" fill="#3C3489" text-anchor="middle" font-family="var(--font-sans)" font-weight="500">Turbine</text>
+        <text x="210" y="86" font-size="10" fill="#534AB7" text-anchor="middle" font-family="var(--font-sans)">(steam drives it)</text>
+        <line x1="130" y1="65" x2="160" y2="65" stroke="#378ADD" stroke-width="1.5" marker-end="url(#ar5)"/>
+        <text x="145" y="58" font-size="10" fill="#185FA5" font-family="var(--font-sans)">steam</text>
+        <rect x="295" y="25" width="90" height="75" rx="4" fill="#E1F5EE" stroke="#1D9E75" stroke-width="0.8"/>
+        <text x="340" y="58" font-size="11" fill="#085041" text-anchor="middle" font-family="var(--font-sans)" font-weight="500">Generator</text>
+        <text x="340" y="72" font-size="10" fill="#0F6E56" text-anchor="middle" font-family="var(--font-sans)">(electricity out)</text>
+        <line x1="260" y1="62" x2="295" y2="62" stroke="#378ADD" stroke-width="1.5" marker-end="url(#ar5)"/>
+        <rect x="420" y="40" width="100" height="90" rx="4" fill="#E6F1FB" stroke="#378ADD" stroke-width="0.8"/>
+        <text x="470" y="78" font-size="11" fill="#042C53" text-anchor="middle" font-family="var(--font-sans)" font-weight="500">Condenser</text>
+        <text x="470" y="92" font-size="10" fill="#185FA5" text-anchor="middle" font-family="var(--font-sans)">(cold seawater</text>
+        <text x="470" y="104" font-size="10" fill="#185FA5" text-anchor="middle" font-family="var(--font-sans)">condenses steam)</text>
+        <line x1="385" y1="62" x2="420" y2="65" stroke="#378ADD" stroke-width="1.5" marker-end="url(#ar5)"/>
+        <text x="400" y="57" font-size="10" fill="#185FA5" font-family="var(--font-sans)">exhaust</text>
+        <line x1="470" y1="130" x2="470" y2="140" stroke="#378ADD" stroke-width="1.5" marker-end="url(#ar5)"/>
+        <text x="440" y="138" font-size="10" fill="#185FA5" font-family="var(--font-sans)">Desalinated</text>
+        <text x="440" y="150" font-size="10" fill="#185FA5" font-family="var(--font-sans)">water out!</text>
+        <text x="390" y="22" font-size="10" fill="#185FA5" font-family="var(--font-sans)">Cold water in (1000m depth)</text>
+        <line x1="470" y1="30" x2="470" y2="40" stroke="#1D9E75" stroke-width="1.5" marker-end="url(#ar5)"/>
+      </svg>
+    </div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#FAEEDA;color:#633806">2</span>Open cycle OTEC — working steps</div>
+    <ul class="sub-list">
+      <li>Step 1: Warm surface seawater (~26°C) is pumped into a vacuum evaporator (low pressure chamber)</li>
+      <li>Step 2: At low pressure, water flash-evaporates into low-pressure steam</li>
+      <li>Step 3: Steam drives a low-pressure turbine which is connected to a generator → electricity produced</li>
+      <li>Step 4: Exhaust steam enters a condenser</li>
+      <li>Step 5: Cold deep ocean water (~4°C, pumped from 1000m depth) condenses the steam</li>
+      <li>Step 6: Condensed water = fresh (desalinated) water — useful byproduct!</li>
+    </ul></div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#FAEEDA;color:#633806">3</span>Closed cycle OTEC (brief)</div>
+    <div class="point-text">Uses a working fluid like ammonia (low boiling point). Warm water vaporizes ammonia → drives turbine → cold water condenses ammonia back → cycle repeats. Seawater is not the working fluid. More efficient than open cycle.</div></div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#FAEEDA;color:#633806">4</span>Advantages</div>
+    <ul class="sub-list">
+      <li>Renewable, 24×7 operation (ocean temperature is stable)</li>
+      <li>Open cycle produces desalinated water as byproduct</li>
+      <li>Zero fuel cost, near-zero emissions</li>
+      <li>Suitable for tropical coastal regions (India, Pacific islands)</li>
+    </ul></div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#FAEEDA;color:#633806">5</span>Limitations</div>
+    <ul class="sub-list">
+      <li>Very low thermal efficiency (~2–3%)</li>
+      <li>Very high capital cost (deep water pipe is very expensive)</li>
+      <li>Suitable only near tropics where ΔT ≥ 20°C</li>
+      <li>Environmental concerns: cold water upwelling disturbs marine life</li>
+    </ul></div>
+    <div class="tip-box"><div class="tip-text">Exam tip: Draw 4 boxes: Warm water → Evaporator → Turbine+Generator → Condenser → desalinated water out. Cold water pipe from 1000m depth going to condenser. Label ΔT = 20°C minimum.</div></div>
+  </div>
+</div>
+
+<div id="unit-3" class="unit-panel">
+  <div class="q-selector">
+    <button class="qbtn aq" onclick="showQ('u3',0,this)" style="background:#EEEDFE;color:#3C3489;border-color:#AFA9EC">Q1: Geothermal energy</button>
+    <button class="qbtn" onclick="showQ('u3',1,this)">Q2: Biomass & biogas</button>
+  </div>
+  <div id="u3-0" class="ans-card visible">
+    <div class="ans-header">
+      <span class="unit-pill" style="background:#EAF3DE;color:#27500A">Unit 4</span>
+      <div class="ans-title">What is geothermal energy? Explain its types and working with neat sketch.</div>
+      <span class="marks-tag">6 marks</span>
+    </div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#EAF3DE;color:#27500A">1</span>Definition</div><div class="point-text">Geothermal energy is heat energy stored in the Earth's interior — in its core, mantle, and crust. Sources of this heat: (a) radioactive decay of elements (uranium, thorium, potassium) and (b) residual heat from Earth's formation. Temperature increases with depth at ~30°C per km (geothermal gradient).</div></div>
+    <div class="diagram-wrap">
+      <div class="diag-label">Geothermal flash steam power plant — diagram</div>
+      <svg viewBox="0 0 580 200" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="ar6" markerWidth="7" markerHeight="7" refX="3" refY="3.5" orient="auto"><polygon points="0 0,7 3.5,0 7" fill="#378ADD"/></marker></defs>
+        <rect x="0" y="155" width="580" height="45" rx="0" fill="#D3D1C7"/>
+        <text x="290" y="175" font-size="11" fill="#444441" text-anchor="middle" font-family="var(--font-sans)">Ground level</text>
+        <rect x="100" y="160" width="30" height="40" rx="2" fill="#888780"/>
+        <line x1="115" y1="160" x2="115" y2="80" stroke="#888780" stroke-width="4"/>
+        <text x="115" y="72" font-size="10" fill="#5F5E5A" text-anchor="middle" font-family="var(--font-sans)">Production well</text>
+        <text x="115" y="62" font-size="10" fill="#5F5E5A" text-anchor="middle" font-family="var(--font-sans)">(hot water up)</text>
+        <line x1="115" y1="155" x2="200" y2="155" stroke="#E24B4A" stroke-width="2"/>
+        <line x1="200" y1="155" x2="200" y2="90" stroke="#E24B4A" stroke-width="2"/>
+        <line x1="200" y1="90" x2="220" y2="90" stroke="#E24B4A" stroke-width="2" marker-end="url(#ar6)"/>
+        <rect x="220" y="60" width="90" height="60" rx="4" fill="#FAEEDA" stroke="#EF9F27" stroke-width="0.8"/>
+        <text x="265" y="88" font-size="11" fill="#633806" text-anchor="middle" font-family="var(--font-sans)" font-weight="500">Flash</text>
+        <text x="265" y="102" font-size="11" fill="#633806" text-anchor="middle" font-family="var(--font-sans)" font-weight="500">separator</text>
+        <line x1="310" y1="80" x2="340" y2="80" stroke="#378ADD" stroke-width="1.5" marker-end="url(#ar6)"/>
+        <text x="322" y="73" font-size="10" fill="#185FA5" font-family="var(--font-sans)">steam</text>
+        <rect x="340" y="55" width="80" height="55" rx="4" fill="#EEEDFE" stroke="#7F77DD" stroke-width="0.8"/>
+        <text x="380" y="83" font-size="11" fill="#3C3489" text-anchor="middle" font-family="var(--font-sans)" font-weight="500">Turbine +</text>
+        <text x="380" y="97" font-size="11" fill="#3C3489" text-anchor="middle" font-family="var(--font-sans)" font-weight="500">Generator</text>
+        <text x="490" y="82" font-size="13" fill="#3B6D11" font-family="var(--font-sans)" font-weight="500">⚡ Power</text>
+        <line x1="420" y1="82" x2="470" y2="82" stroke="#378ADD" stroke-width="1.5" marker-end="url(#ar6)"/>
+        <rect x="455" y="110" width="80" height="40" rx="4" fill="#E6F1FB" stroke="#378ADD" stroke-width="0.8"/>
+        <text x="495" y="134" font-size="11" fill="#042C53" text-anchor="middle" font-family="var(--font-sans)">Condenser</text>
+        <line x1="380" y1="110" x2="380" y2="140" stroke="#378ADD" stroke-width="1.5"/>
+        <line x1="380" y1="140" x2="455" y2="130" stroke="#378ADD" stroke-width="1.5" marker-end="url(#ar6)"/>
+        <rect x="390" y="160" width="30" height="40" rx="2" fill="#888780"/>
+        <line x1="405" y1="160" x2="405" y2="85" stroke="#1D9E75" stroke-width="3" stroke-dasharray="4,2"/>
+        <text x="405" y="58" font-size="10" fill="#0F6E56" text-anchor="middle" font-family="var(--font-sans)">Injection well</text>
+        <text x="405" y="48" font-size="10" fill="#0F6E56" text-anchor="middle" font-family="var(--font-sans)">(water reinjected)</text>
+        <line x1="495" y1="150" x2="405" y2="155" stroke="#1D9E75" stroke-width="1.5" marker-end="url(#ar6)"/>
+      </svg>
+    </div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#EAF3DE;color:#27500A">2</span>Types of geothermal systems</div>
+    <ul class="sub-list">
+      <li>Dry steam: Direct steam from underground → turbine. Oldest type. (Geysers, California)</li>
+      <li>Flash steam: Hot pressurized water (&gt;180°C) pumped up → pressure drop → flashes to steam → turbine. Most common.</li>
+      <li>Binary cycle: Moderate temp water (~100–180°C) heats secondary fluid (isobutane/ammonia) → secondary fluid vaporizes → turbine. Used for lower temperature resources.</li>
+      <li>EGS (Enhanced Geothermal System): Water injected into hot dry rock → heated → extracted. Man-made reservoir.</li>
+    </ul></div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#EAF3DE;color:#27500A">3</span>Flash steam working (most common — above diagram)</div>
+    <ul class="sub-list">
+      <li>Hot pressurized water drilled from depth (~1–3 km)</li>
+      <li>Water enters flash separator → pressure drops → flashes to steam</li>
+      <li>Steam drives turbine → generator produces electricity</li>
+      <li>Exhaust steam condensed → water reinjected into ground (sustainable)</li>
+    </ul></div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#EAF3DE;color:#27500A">4</span>Geothermal heat pump</div><div class="point-text">Uses shallow ground temperature (~15°C constant year-round) to heat buildings in winter (ground is warmer than air) and cool in summer (ground is cooler than air). No electricity generation — direct heating/cooling.</div></div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#EAF3DE;color:#27500A">5</span>Advantages</div>
+    <ul class="sub-list">
+      <li>Reliable 24×7 — not dependent on sun or wind</li>
+      <li>Very low CO₂ emissions</li>
+      <li>Small land footprint</li>
+      <li>Can provide both electricity and direct heating</li>
+    </ul></div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#EAF3DE;color:#27500A">6</span>Limitations</div>
+    <ul class="sub-list">
+      <li>Site-specific — not available everywhere</li>
+      <li>High drilling costs</li>
+      <li>H₂S gas release can cause pollution</li>
+      <li>Risk of induced seismic activity (EGS)</li>
+    </ul></div>
+    <div class="tip-box"><div class="tip-text">Exam tip: Draw flash steam plant — production well → flash separator → turbine+generator → condenser → injection well. Label hot water in, steam path, power out, and water reinjection.</div></div>
+  </div>
+  <div id="u3-1" class="ans-card">
+    <div class="ans-header">
+      <span class="unit-pill" style="background:#EAF3DE;color:#27500A">Unit 4</span>
+      <div class="ans-title">What is biomass energy? Explain biogas production process with neat sketch.</div>
+      <span class="marks-tag">6 marks</span>
+    </div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#EAF3DE;color:#27500A">1</span>Biomass definition</div><div class="point-text">Biomass is organic matter from living or recently living organisms — plants, animals, agricultural waste, forestry residue, and municipal solid waste. It stores solar energy in chemical form (through photosynthesis). It is renewable as long as plants keep growing.</div></div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#EAF3DE;color:#27500A">2</span>Types of biomass feedstocks</div>
+    <ul class="sub-list">
+      <li>Agricultural waste: paddy straw, sugarcane bagasse, corn stover</li>
+      <li>Energy crops: jatropha, switch grass, miscanthus</li>
+      <li>Wood and forestry residue: sawdust, wood chips</li>
+      <li>Animal waste: cow dung, poultry manure</li>
+      <li>Municipal solid waste (MSW): organic fraction of city garbage</li>
+    </ul></div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#EAF3DE;color:#27500A">3</span>Biogas — definition & composition</div><div class="point-text">Biogas is produced by anaerobic digestion (breakdown of organic matter without oxygen). Composition: 55–70% methane (CH₄) + 30–40% CO₂ + traces of H₂S. Calorific value: ~20–25 MJ/m³. It is a renewable substitute for natural gas (LPG).</div></div>
+    <div class="diagram-wrap">
+      <div class="diag-label">Floating drum biogas plant (KVIC type) — diagram</div>
+      <svg viewBox="0 0 580 195" xmlns="http://www.w3.org/2000/svg">
+        <rect x="100" y="100" width="320" height="80" rx="8" fill="#D3D1C7" stroke="#888780" stroke-width="1"/>
+        <ellipse cx="260" cy="100" rx="160" ry="25" fill="#B4B2A9" stroke="#888780" stroke-width="1"/>
+        <rect x="60" y="115" width="50" height="60" rx="6" fill="#9FE1CB" stroke="#1D9E75" stroke-width="1"/>
+        <text x="85" y="140" font-size="10" fill="#085041" text-anchor="middle" font-family="var(--font-sans)">Inlet</text>
+        <text x="85" y="153" font-size="10" fill="#085041" text-anchor="middle" font-family="var(--font-sans)">pipe</text>
+        <text x="85" y="105" font-size="10" fill="#085041" text-anchor="middle" font-family="var(--font-sans)">Slurry in</text>
+        <text x="35" y="140" font-size="10" fill="#0F6E56" font-family="var(--font-sans)">(dung +</text>
+        <text x="35" y="152" font-size="10" fill="#0F6E56" font-family="var(--font-sans)">water)</text>
+        <rect x="420" y="115" width="50" height="60" rx="6" fill="#9FE1CB" stroke="#1D9E75" stroke-width="1"/>
+        <text x="445" y="140" font-size="10" fill="#085041" text-anchor="middle" font-family="var(--font-sans)">Outlet</text>
+        <text x="445" y="153" font-size="10" fill="#085041" text-anchor="middle" font-family="var(--font-sans)">pipe</text>
+        <text x="445" y="105" font-size="10" fill="#0F6E56" text-anchor="middle" font-family="var(--font-sans)">Digestate</text>
+        <text x="445" y="117" font-size="10" fill="#0F6E56" text-anchor="middle" font-family="var(--font-sans)">(fertilizer)</text>
+        <ellipse cx="260" cy="78" rx="90" ry="30" fill="#FAEEDA" stroke="#EF9F27" stroke-width="1.2"/>
+        <text x="260" y="72" font-size="11" fill="#633806" text-anchor="middle" font-family="var(--font-sans)" font-weight="500">Floating gas holder</text>
+        <text x="260" y="87" font-size="10" fill="#854F0B" text-anchor="middle" font-family="var(--font-sans)">(collects biogas)</text>
+        <line x1="260" y1="48" x2="260" y2="20" stroke="#EF9F27" stroke-width="2"/>
+        <line x1="260" y1="20" x2="350" y2="20" stroke="#EF9F27" stroke-width="2"/>
+        <text x="360" y="24" font-size="11" fill="#854F0B" font-family="var(--font-sans)">Biogas pipe → stove/engine</text>
+        <text x="260" y="185" font-size="11" fill="#444441" text-anchor="middle" font-family="var(--font-sans)">Digester tank (underground, brick/concrete)</text>
+      </svg>
+    </div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#EAF3DE;color:#27500A">4</span>Anaerobic digestion — 4 stages</div>
+    <ul class="sub-list">
+      <li>Hydrolysis: Complex molecules (proteins, fats, carbohydrates) broken into simpler ones (sugars, amino acids)</li>
+      <li>Acidogenesis: Bacteria convert to volatile fatty acids + CO₂ + H₂</li>
+      <li>Acetogenesis: Fatty acids converted to acetic acid, H₂, CO₂</li>
+      <li>Methanogenesis: Methanogens convert acetic acid + H₂ → CH₄ (methane = biogas)</li>
+    </ul></div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#EAF3DE;color:#27500A">5</span>Advantages of biogas</div>
+    <ul class="sub-list">
+      <li>Renewable and carbon-neutral</li>
+      <li>Reduces methane emissions from waste (greenhouse gas control)</li>
+      <li>Digestate (slurry) is excellent organic fertilizer</li>
+      <li>Decentralized energy for rural areas (cooking, lighting)</li>
+      <li>Reduces dependence on LPG/firewood</li>
+    </ul></div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#EAF3DE;color:#27500A">6</span>Limitations</div>
+    <ul class="sub-list">
+      <li>H₂S content causes corrosion in pipes and engines</li>
+      <li>Requires continuous feedstock supply</li>
+      <li>Lower gas yield in cold climates (bacteria need 25–37°C)</li>
+      <li>Large space required for community plants</li>
+    </ul></div>
+    <div class="tip-box"><div class="tip-text">Exam tip: Draw floating drum plant — show underground digester, floating drum on top, inlet (slurry), outlet (digestate), and biogas pipe leading to burner. Label the 4 digestion stages as a flow.</div></div>
+  </div>
+</div>
+
+<div id="unit-4" class="unit-panel">
+  <div class="q-selector">
+    <button class="qbtn aq" onclick="showQ('u4',0,this)" style="background:#EEEDFE;color:#3C3489;border-color:#AFA9EC">Q1: Fuel cell</button>
+    <button class="qbtn" onclick="showQ('u4',1,this)">Q2: Li-ion battery</button>
+  </div>
+  <div id="u4-0" class="ans-card visible">
+    <div class="ans-header">
+      <span class="unit-pill" style="background:#FBEAF0;color:#72243E">Unit 5</span>
+      <div class="ans-title">What is a fuel cell? Explain design and operating principle with neat sketch.</div>
+      <span class="marks-tag">6 marks</span>
+    </div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#FBEAF0;color:#72243E">1</span>Definition</div><div class="point-text">A fuel cell is an electrochemical device that converts chemical energy of a fuel (hydrogen) directly into electrical energy without combustion. It is like a battery but never runs out as long as fuel is supplied. No moving parts, no noise, no emissions (only water as byproduct).</div></div>
+    <div class="diagram-wrap">
+      <div class="diag-label">Hydrogen-oxygen fuel cell (PEMFC type) — diagram</div>
+      <svg viewBox="0 0 580 210" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="ar7" markerWidth="7" markerHeight="7" refX="3" refY="3.5" orient="auto"><polygon points="0 0,7 3.5,0 7" fill="#378ADD"/></marker><marker id="ar8" markerWidth="7" markerHeight="7" refX="3" refY="3.5" orient="auto"><polygon points="0 0,7 3.5,0 7" fill="#888780"/></marker></defs>
+        <rect x="120" y="30" width="80" height="150" rx="4" fill="#E6F1FB" stroke="#378ADD" stroke-width="1"/>
+        <text x="160" y="105" font-size="12" fill="#042C53" text-anchor="middle" font-family="var(--font-sans)" font-weight="500">Anode (−)</text>
+        <text x="160" y="120" font-size="11" fill="#185FA5" text-anchor="middle" font-family="var(--font-sans)">H₂ oxidized</text>
+        <text x="160" y="135" font-size="11" fill="#185FA5" text-anchor="middle" font-family="var(--font-sans)">H₂ → 2H⁺+2e⁻</text>
+        <rect x="240" y="30" width="60" height="150" rx="2" fill="#FAEEDA" stroke="#EF9F27" stroke-width="1"/>
+        <text x="270" y="105" font-size="11" fill="#633806" text-anchor="middle" font-family="var(--font-sans)" font-weight="500">Electrolyte</text>
+        <text x="270" y="120" font-size="10" fill="#854F0B" text-anchor="middle" font-family="var(--font-sans)">(H⁺ ions</text>
+        <text x="270" y="133" font-size="10" fill="#854F0B" text-anchor="middle" font-family="var(--font-sans)">pass through)</text>
+        <rect x="340" y="30" width="80" height="150" rx="4" fill="#E1F5EE" stroke="#1D9E75" stroke-width="1"/>
+        <text x="380" y="105" font-size="12" fill="#085041" text-anchor="middle" font-family="var(--font-sans)" font-weight="500">Cathode (+)</text>
+        <text x="380" y="120" font-size="11" fill="#0F6E56" text-anchor="middle" font-family="var(--font-sans)">O₂ + 2H⁺ + 2e⁻</text>
+        <text x="380" y="135" font-size="11" fill="#0F6E56" text-anchor="middle" font-family="var(--font-sans)">→ H₂O</text>
+        <line x1="80" y1="100" x2="120" y2="100" stroke="#EF9F27" stroke-width="2" marker-end="url(#ar7)"/>
+        <text x="55" y="93" font-size="11" fill="#854F0B" font-family="var(--font-sans)">H₂ fuel</text>
+        <text x="55" y="107" font-size="11" fill="#854F0B" font-family="var(--font-sans)">in →</text>
+        <line x1="420" y1="100" x2="460" y2="100" stroke="#1D9E75" stroke-width="2" marker-end="url(#ar7)"/>
+        <text x="465" y="97" font-size="11" fill="#0F6E56" font-family="var(--font-sans)">← O₂</text>
+        <text x="465" y="110" font-size="11" fill="#0F6E56" font-family="var(--font-sans)">(air) in</text>
+        <line x1="160" y1="15" x2="420" y2="15" stroke="#888780" stroke-width="2"/>
+        <line x1="160" y1="15" x2="160" y2="30" stroke="#888780" stroke-width="2"/>
+        <line x1="420" y1="15" x2="420" y2="30" stroke="#888780" stroke-width="2"/>
+        <circle cx="290" cy="15" r="12" fill="none" stroke="#888780" stroke-width="1.5"/>
+        <text x="290" y="19" font-size="10" fill="#444441" text-anchor="middle" font-family="var(--font-sans)">Load</text>
+        <text x="250" y="8" font-size="11" fill="#185FA5" font-family="var(--font-sans)">e⁻ →→→ (current)</text>
+        <text x="380" y="190" font-size="11" fill="#0F6E56" text-anchor="middle" font-family="var(--font-sans)">H₂O (water)</text>
+        <line x1="380" y1="180" x2="380" y2="170" stroke="#1D9E75" stroke-width="1.5" marker-end="url(#ar7)"/>
+      </svg>
+    </div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#FBEAF0;color:#72243E">2</span>Reactions (easy to remember)</div>
+    <ul class="sub-list">
+      <li>At Anode (−): H₂ → 2H⁺ + 2e⁻ (hydrogen gives up electrons)</li>
+      <li>H⁺ ions pass through electrolyte to cathode</li>
+      <li>Electrons flow through external circuit → create electric current</li>
+      <li>At Cathode (+): ½O₂ + 2H⁺ + 2e⁻ → H₂O (water forms)</li>
+      <li>Net: H₂ + ½O₂ → H₂O + electricity + heat</li>
+    </ul></div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#FBEAF0;color:#72243E">3</span>Types of fuel cells</div>
+    <ul class="sub-list">
+      <li>PEMFC (Polymer Electrolyte): temp ~80°C, used in vehicles (Toyota Mirai)</li>
+      <li>AFC (Alkaline): KOH electrolyte, used in NASA spacecraft</li>
+      <li>PAFC (Phosphoric Acid): temp ~200°C, commercial buildings</li>
+      <li>MCFC (Molten Carbonate): temp ~650°C, uses natural gas</li>
+      <li>SOFC (Solid Oxide): temp ~1000°C, highest efficiency (~60%)</li>
+    </ul></div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#FBEAF0;color:#72243E">4</span>Polarization losses (problems)</div>
+    <ul class="sub-list">
+      <li>Activation loss: energy needed to start the reaction</li>
+      <li>Ohmic loss: resistance of electrolyte and contacts</li>
+      <li>Concentration loss: fuel/oxidant starves at high current density</li>
+    </ul></div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#FBEAF0;color:#72243E">5</span>Advantages & limitations</div>
+    <ul class="sub-list">
+      <li>Advantages: high efficiency (40–60%), zero direct emissions, silent, no moving parts</li>
+      <li>Limitations: expensive platinum catalyst, H₂ storage is difficult, high cost</li>
+    </ul></div>
+    <div class="tip-box"><div class="tip-text">Exam tip: Draw anode | electrolyte | cathode vertically. Label H₂ input at anode, O₂ at cathode. Show H⁺ ions through electrolyte and e⁻ through external circuit to load. Write both half reactions.</div></div>
+  </div>
+  <div id="u4-1" class="ans-card">
+    <div class="ans-header">
+      <span class="unit-pill" style="background:#FBEAF0;color:#72243E">Unit 5</span>
+      <div class="ans-title">Explain working of Lithium-ion battery with neat sketch.</div>
+      <span class="marks-tag">6 marks</span>
+    </div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#FBEAF0;color:#72243E">1</span>Definition</div><div class="point-text">A lithium-ion (Li-ion) battery is a secondary (rechargeable) battery that stores energy by moving lithium ions between anode and cathode through an electrolyte. It is the most widely used battery in mobile phones, EVs, and laptops today.</div></div>
+    <div class="diagram-wrap">
+      <div class="diag-label">Lithium-ion battery — working diagram</div>
+      <svg viewBox="0 0 580 205" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="ar9" markerWidth="7" markerHeight="7" refX="3" refY="3.5" orient="auto"><polygon points="0 0,7 3.5,0 7" fill="#7F77DD"/></marker><marker id="ar10" markerWidth="7" markerHeight="7" refX="3" refY="3.5" orient="auto"><polygon points="0 0,7 3.5,0 7" fill="#D4537E"/></marker></defs>
+        <rect x="80" y="35" width="100" height="140" rx="4" fill="#EEEDFE" stroke="#7F77DD" stroke-width="1"/>
+        <text x="130" y="90" font-size="12" fill="#3C3489" text-anchor="middle" font-family="var(--font-sans)" font-weight="500">Anode (−)</text>
+        <text x="130" y="107" font-size="11" fill="#534AB7" text-anchor="middle" font-family="var(--font-sans)">Graphite (C)</text>
+        <text x="130" y="122" font-size="10" fill="#534AB7" text-anchor="middle" font-family="var(--font-sans)">Li⁺ ions stored</text>
+        <text x="130" y="135" font-size="10" fill="#534AB7" text-anchor="middle" font-family="var(--font-sans)">between layers</text>
+        <rect x="230" y="35" width="70" height="140" rx="2" fill="#E1F5EE" stroke="#1D9E75" stroke-width="1"/>
+        <text x="265" y="100" font-size="11" fill="#085041" text-anchor="middle" font-family="var(--font-sans)" font-weight="500">Electrolyte</text>
+        <text x="265" y="115" font-size="10" fill="#0F6E56" text-anchor="middle" font-family="var(--font-sans)">(Li salt in</text>
+        <text x="265" y="128" font-size="10" fill="#0F6E56" text-anchor="middle" font-family="var(--font-sans)">organic solvent)</text>
+        <rect x="350" y="35" width="100" height="140" rx="4" fill="#FBEAF0" stroke="#D4537E" stroke-width="1"/>
+        <text x="400" y="90" font-size="12" fill="#72243E" text-anchor="middle" font-family="var(--font-sans)" font-weight="500">Cathode (+)</text>
+        <text x="400" y="107" font-size="11" fill="#993556" text-anchor="middle" font-family="var(--font-sans)">LiCoO₂</text>
+        <text x="400" y="122" font-size="10" fill="#993556" text-anchor="middle" font-family="var(--font-sans)">(or LiFePO₄,</text>
+        <text x="400" y="135" font-size="10" fill="#993556" text-anchor="middle" font-family="var(--font-sans)">LiMnO₂)</text>
+        <line x1="230" y1="105" x2="180" y2="105" stroke="#7F77DD" stroke-width="2" marker-end="url(#ar9)"/>
+        <text x="205" y="96" font-size="10" fill="#534AB7" font-family="var(--font-sans)" text-anchor="middle">Li⁺</text>
+        <text x="205" y="120" font-size="10" fill="#854F0B" font-family="var(--font-sans)" text-anchor="middle">discharge</text>
+        <line x1="300" y1="85" x2="350" y2="85" stroke="#D4537E" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#ar10)"/>
+        <text x="325" y="75" font-size="10" fill="#72243E" font-family="var(--font-sans)" text-anchor="middle">Li⁺ (charge)</text>
+        <line x1="130" y1="20" x2="400" y2="20" stroke="#888780" stroke-width="2"/>
+        <line x1="130" y1="20" x2="130" y2="35" stroke="#888780" stroke-width="2"/>
+        <line x1="400" y1="20" x2="400" y2="35" stroke="#888780" stroke-width="2"/>
+        <circle cx="265" cy="20" r="12" fill="none" stroke="#888780" stroke-width="1.5"/>
+        <text x="265" y="24" font-size="10" fill="#444441" text-anchor="middle" font-family="var(--font-sans)">Load</text>
+        <text x="155" y="13" font-size="11" fill="#185FA5" font-family="var(--font-sans)">e⁻ flow (external circuit)</text>
+        <text x="265" y="195" font-size="10" fill="#5F5E5A" text-anchor="middle" font-family="var(--font-sans)">Separator (porous membrane) between electrodes prevents short circuit</text>
+        <line x1="228" y1="35" x2="228" y2="175" stroke="#97C459" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="218" y="183" font-size="9" fill="#3B6D11" font-family="var(--font-sans)">separator</text>
+      </svg>
+    </div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#FBEAF0;color:#72243E">2</span>Construction</div>
+    <ul class="sub-list">
+      <li>Anode (−): Graphite (carbon layers where Li⁺ ions are stored during charging)</li>
+      <li>Cathode (+): Lithium metal oxide — LiCoO₂, LiFePO₄, or LiMnO₂</li>
+      <li>Electrolyte: Lithium salt (LiPF₆) dissolved in organic solvent — conducts Li⁺ ions</li>
+      <li>Separator: Porous polyethylene/polypropylene membrane — prevents short circuit</li>
+    </ul></div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#FBEAF0;color:#72243E">3</span>Working — discharge (battery powering device)</div>
+    <ul class="sub-list">
+      <li>Li⁺ ions leave graphite anode → travel through electrolyte → insert into cathode</li>
+      <li>Electrons flow from anode → external circuit → cathode (creates current)</li>
+      <li>At cathode: Li⁺ + e⁻ + cathode → LiCoO₂ (lithium inserts)</li>
+    </ul></div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#FBEAF0;color:#72243E">4</span>Working — charging (plugged in)</div>
+    <ul class="sub-list">
+      <li>External voltage forces Li⁺ to leave cathode → travel through electrolyte → insert back into graphite anode</li>
+      <li>Electrons forced through external circuit from cathode to anode</li>
+      <li>Reverse of discharge process</li>
+    </ul></div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#FBEAF0;color:#72243E">5</span>Characteristics</div>
+    <ul class="sub-list">
+      <li>Cell voltage: ~3.6 V (much higher than Pb-acid 2V or Ni-MH 1.2V)</li>
+      <li>Energy density: 150–250 Wh/kg (best among commercial batteries)</li>
+      <li>Cycle life: 500–2000 cycles</li>
+      <li>No memory effect</li>
+    </ul></div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#FBEAF0;color:#72243E">6</span>Advantages & limitations</div>
+    <ul class="sub-list">
+      <li>Advantages: high energy density, lightweight, long cycle life, no memory effect</li>
+      <li>Limitations: expensive, thermal runaway risk if overcharged, requires BMS (battery management system)</li>
+    </ul></div>
+    <div class="tip-box"><div class="tip-text">Exam tip: Draw anode (graphite) | electrolyte | cathode (LiCoO₂). Show Li⁺ moving left (discharge) and right (charge). Draw e⁻ flow through external circuit with a load/bulb symbol.</div></div>
+  </div>
+</div>
+
+<div id="unit-5" class="unit-panel">
+  <div class="q-selector">
+    <button class="qbtn aq" onclick="showQ('u5',0,this)" style="background:#EEEDFE;color:#3C3489;border-color:#AFA9EC">Q1: MHD power generation</button>
+    <button class="qbtn" onclick="showQ('u5',1,this)">Q2: Flywheel vs Supercapacitor</button>
+  </div>
+  <div id="u5-0" class="ans-card visible">
+    <div class="ans-header">
+      <span class="unit-pill" style="background:#E6F1FB;color:#0C447C">Unit 6</span>
+      <div class="ans-title">Discuss operating principle of MHD power generation with neat sketch. What are its challenges?</div>
+      <span class="marks-tag">6 marks</span>
+    </div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#E6F1FB;color:#0C447C">1</span>Definition</div><div class="point-text">MHD (Magnetohydrodynamic) power generation produces electricity directly from a hot conducting fluid (ionized gas/plasma) moving through a magnetic field — based on Faraday's law of electromagnetic induction, applied to a fluid conductor. No turbine, no moving mechanical parts.</div></div>
+    <div class="diagram-wrap">
+      <div class="diag-label">MHD power generation — principle diagram</div>
+      <svg viewBox="0 0 580 200" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="ar11" markerWidth="7" markerHeight="7" refX="3" refY="3.5" orient="auto"><polygon points="0 0,7 3.5,0 7" fill="#378ADD"/></marker><marker id="ar12" markerWidth="7" markerHeight="7" refX="3" refY="3.5" orient="auto"><polygon points="0 0,7 3.5,0 7" fill="#E24B4A"/></marker></defs>
+        <rect x="10" y="50" width="80" height="100" rx="6" fill="#FAEEDA" stroke="#EF9F27" stroke-width="1"/>
+        <text x="50" y="95" font-size="11" fill="#633806" text-anchor="middle" font-family="var(--font-sans)" font-weight="500">Combustion</text>
+        <text x="50" y="110" font-size="11" fill="#633806" text-anchor="middle" font-family="var(--font-sans)" font-weight="500">chamber</text>
+        <text x="50" y="125" font-size="10" fill="#854F0B" text-anchor="middle" font-family="var(--font-sans)">(fuel + seeding)</text>
+        <line x1="90" y1="100" x2="130" y2="100" stroke="#E24B4A" stroke-width="2" marker-end="url(#ar12)"/>
+        <text x="110" y="93" font-size="10" fill="#791F1F" font-family="var(--font-sans)" text-anchor="middle">plasma</text>
+        <text x="110" y="113" font-size="10" fill="#791F1F" font-family="var(--font-sans)" text-anchor="middle">~2500°C</text>
+        <rect x="130" y="50" width="200" height="100" rx="4" fill="#E6F1FB" stroke="#378ADD" stroke-width="1.2"/>
+        <text x="165" y="98" font-size="11" fill="#042C53" text-anchor="middle" font-family="var(--font-sans)" font-weight="500">MHD</text>
+        <text x="165" y="113" font-size="11" fill="#042C53" text-anchor="middle" font-family="var(--font-sans)" font-weight="500">duct</text>
+        <line x1="230" y1="10" x2="230" y2="50" stroke="#7F77DD" stroke-width="2" marker-end="url(#ar12)"/>
+        <text x="260" y="30" font-size="11" fill="#3C3489" font-family="var(--font-sans)">Magnetic field B</text>
+        <text x="260" y="43" font-size="10" fill="#534AB7" font-family="var(--font-sans)">(perpendicular)</text>
+        <line x1="230" y1="150" x2="230" y2="190" stroke="#7F77DD" stroke-width="2"/>
+        <text x="200" y="175" font-size="10" fill="#3C3489" font-family="var(--font-sans)">S pole</text>
+        <text x="200" y="30" font-size="10" fill="#3C3489" font-family="var(--font-sans)">N pole</text>
+        <line x1="130" y1="75" x2="130" y2="125" stroke="#1D9E75" stroke-width="2"/>
+        <line x1="330" y1="75" x2="330" y2="125" stroke="#1D9E75" stroke-width="2"/>
+        <text x="110" y="103" font-size="11" fill="#0F6E56" font-family="var(--font-sans)">+</text>
+        <text x="334" y="103" font-size="11" fill="#0F6E56" font-family="var(--font-sans)">−</text>
+        <text x="130" y="48" font-size="10" fill="#0F6E56" font-family="var(--font-sans)">Electrode</text>
+        <text x="300" y="48" font-size="10" fill="#0F6E56" font-family="var(--font-sans)">Electrode</text>
+        <line x1="330" y1="75" x2="410" y2="75" stroke="#888780" stroke-width="1.5"/>
+        <line x1="410" y1="75" x2="410" y2="125" stroke="#888780" stroke-width="1.5"/>
+        <line x1="330" y1="125" x2="410" y2="125" stroke="#888780" stroke-width="1.5"/>
+        <circle cx="450" cy="100" r="20" fill="none" stroke="#888780" stroke-width="1.5"/>
+        <text x="450" y="104" font-size="11" fill="#444441" text-anchor="middle" font-family="var(--font-sans)">Load</text>
+        <line x1="410" y1="75" x2="430" y2="80" stroke="#888780" stroke-width="1.5"/>
+        <line x1="410" y1="125" x2="430" y2="120" stroke="#888780" stroke-width="1.5"/>
+        <text x="475" y="90" font-size="11" fill="#3B6D11" font-family="var(--font-sans)">DC</text>
+        <text x="475" y="103" font-size="11" fill="#3B6D11" font-family="var(--font-sans)">power</text>
+        <line x1="330" y1="100" x2="370" y2="100" stroke="#E24B4A" stroke-width="2" marker-end="url(#ar12)"/>
+        <text x="355" y="92" font-size="10" fill="#791F1F" font-family="var(--font-sans)">plasma out</text>
+        <text x="510" y="40" font-size="10" fill="#5F5E5A" font-family="var(--font-sans)">F = qv × B</text>
+        <text x="510" y="55" font-size="10" fill="#5F5E5A" font-family="var(--font-sans)">(Lorentz force</text>
+        <text x="510" y="68" font-size="10" fill="#5F5E5A" font-family="var(--font-sans)">separates ions)</text>
+      </svg>
+    </div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#E6F1FB;color:#0C447C">2</span>Working principle (step-by-step)</div>
+    <ul class="sub-list">
+      <li>Fuel (coal/gas) is burned at very high temperature (~2500°C)</li>
+      <li>Seed material (potassium carbonate K₂CO₃) is added to improve electrical conductivity of gas</li>
+      <li>Hot ionized gas (plasma) flows at high velocity through the MHD duct</li>
+      <li>A strong magnetic field (B) is applied perpendicular to the flow</li>
+      <li>Lorentz force (F = qv × B) acts on ions → positive ions go to one electrode, negative to other</li>
+      <li>Potential difference created across electrodes → DC electricity collected</li>
+    </ul></div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#E6F1FB;color:#0C447C">3</span>Advantages of MHD</div>
+    <ul class="sub-list">
+      <li>No moving parts → no mechanical wear</li>
+      <li>Very high theoretical efficiency (50–60%) when combined with steam cycle</li>
+      <li>Can use various fuels (coal, gas, nuclear)</li>
+      <li>Quick start-up and shutdown</li>
+    </ul></div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#E6F1FB;color:#0C447C">4</span>Challenges / limitations</div>
+    <ul class="sub-list">
+      <li>Requires very high temperature (&gt;2000°C) for plasma ionization — difficult to achieve and maintain</li>
+      <li>Electrode erosion due to hot corrosive plasma</li>
+      <li>Seed material (K) recovery is complex and expensive</li>
+      <li>Needs very powerful superconducting magnets (expensive)</li>
+      <li>Low conversion efficiency standalone — must combine with conventional steam cycle</li>
+      <li>Still mostly at research/experimental stage worldwide</li>
+    </ul></div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#E6F1FB;color:#0C447C">5</span>Applications</div>
+    <ul class="sub-list">
+      <li>Used as a topping cycle (before steam turbine) to increase overall plant efficiency</li>
+      <li>Space power generation (nuclear-powered MHD)</li>
+      <li>Military propulsion (electromagnetic torpedoes)</li>
+    </ul></div>
+    <div class="tip-box"><div class="tip-text">Exam tip: Draw duct with plasma flowing horizontally. Magnetic field arrows coming from top (N pole). Electrodes on left and right walls. Current to external load. Label: v (velocity), B (magnetic field), F (Lorentz force). Write F = qv × B.</div></div>
+  </div>
+  <div id="u5-1" class="ans-card">
+    <div class="ans-header">
+      <span class="unit-pill" style="background:#E6F1FB;color:#0C447C">Unit 6</span>
+      <div class="ans-title">Describe flywheel and supercapacitor as energy storage. Compare both.</div>
+      <span class="marks-tag">6 marks</span>
+    </div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#E6F1FB;color:#0C447C">1</span>Flywheel — definition & construction</div>
+    <div class="point-text">A flywheel stores energy as rotational kinetic energy in a spinning rotor. Construction: massive disc/cylinder of steel or carbon-fibre composite, mounted on a shaft with magnetic bearings (frictionless), enclosed in vacuum housing to reduce air drag.</div></div>
+    <div class="diagram-wrap">
+      <div class="diag-label">Flywheel energy storage — diagram</div>
+      <svg viewBox="0 0 580 170" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="120" cy="85" rx="70" ry="70" fill="#D3D1C7" stroke="#888780" stroke-width="1.5"/>
+        <ellipse cx="120" cy="85" rx="50" ry="50" fill="#B4B2A9" stroke="#5F5E5A" stroke-width="1"/>
+        <ellipse cx="120" cy="85" rx="12" ry="12" fill="#888780" stroke="#444441" stroke-width="1"/>
+        <text x="120" y="89" font-size="10" fill="#F1EFE8" text-anchor="middle" font-family="var(--font-sans)">Hub</text>
+        <line x1="120" y1="15" x2="120" y2="5" stroke="#888780" stroke-width="3"/>
+        <line x1="120" y1="155" x2="120" y2="165" stroke="#888780" stroke-width="3"/>
+        <text x="200" y="50" font-size="12" fill="#444441" font-family="var(--font-sans)" font-weight="500">Flywheel rotor</text>
+        <text x="200" y="66" font-size="11" fill="#5F5E5A" font-family="var(--font-sans)">(steel or carbon fibre)</text>
+        <text x="200" y="85" font-size="11" fill="#5F5E5A" font-family="var(--font-sans)">Energy stored: E = ½Iω²</text>
+        <text x="200" y="101" font-size="11" fill="#5F5E5A" font-family="var(--font-sans)">I = moment of inertia</text>
+        <text x="200" y="117" font-size="11" fill="#5F5E5A" font-family="var(--font-sans)">ω = angular velocity (rad/s)</text>
+        <path d="M 140 55 Q 160 40 155 65" stroke="#1D9E75" stroke-width="2" fill="none"/>
+        <text x="162" y="52" font-size="11" fill="#0F6E56" font-family="var(--font-sans)">ω →</text>
+        <rect x="70" y="0" width="100" height="10" rx="2" fill="#888780"/>
+        <rect x="70" y="160" width="100" height="10" rx="2" fill="#888780"/>
+        <text x="120" y="8" font-size="9" fill="#F1EFE8" text-anchor="middle" font-family="var(--font-sans)">Magnetic bearing</text>
+        <text x="120" y="168" font-size="9" fill="#F1EFE8" text-anchor="middle" font-family="var(--font-sans)">Magnetic bearing</text>
+      </svg>
+    </div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#E6F1FB;color:#0C447C">2</span>Flywheel working</div>
+    <ul class="sub-list">
+      <li>Charging: Electric motor spins the flywheel to high RPM (10,000–100,000 rpm) → stores kinetic energy</li>
+      <li>Discharging: Flywheel slows down and drives a generator → releases electrical energy</li>
+      <li>Motor and generator are often the same machine (motor-generator)</li>
+      <li>Vacuum enclosure reduces friction losses; magnetic bearings eliminate contact friction</li>
+    </ul></div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#E6F1FB;color:#0C447C">3</span>Supercapacitor — definition & construction</div>
+    <div class="point-text">A supercapacitor (electric double-layer capacitor, EDLC) stores energy electrostatically in an electric double layer at the electrode-electrolyte interface. No chemical reaction — purely physical charge separation. Construction: two porous carbon electrodes (very high surface area) separated by an electrolyte and a porous separator.</div></div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#E6F1FB;color:#0C447C">4</span>Supercapacitor working</div>
+    <ul class="sub-list">
+      <li>When charged: ions from electrolyte accumulate at electrode surface (double layer forms) → electric field stores energy</li>
+      <li>When discharged: ions return to electrolyte → energy released as current</li>
+      <li>Key: no chemical reaction → extremely fast charge/discharge (seconds) and very long life</li>
+      <li>Energy = ½CV² (C = capacitance, up to thousands of farads)</li>
+    </ul></div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#E6F1FB;color:#0C447C">5</span>Comparison table</div>
+    <ul class="sub-list">
+      <li>Energy density — Flywheel: 5–100 Wh/kg · Supercapacitor: 1–10 Wh/kg</li>
+      <li>Power density — Flywheel: high · Supercapacitor: very high (1–10 kW/kg)</li>
+      <li>Cycle life — Flywheel: millions · Supercapacitor: &gt;500,000 cycles</li>
+      <li>Self discharge — Flywheel: ~10–20%/hour · Supercapacitor: ~10–40%/day</li>
+      <li>Response time — Both: milliseconds (very fast)</li>
+      <li>Applications — Flywheel: UPS, grid stabilization · Supercapacitor: hybrid vehicles, burst power electronics</li>
+    </ul></div>
+    <div class="point-block"><div class="point-head"><span class="num-badge" style="background:#E6F1FB;color:#0C447C">6</span>Advantages & limitations</div>
+    <ul class="sub-list">
+      <li>Both: much longer life than batteries, fast response, no chemical degradation</li>
+      <li>Flywheel limitation: gyroscopic effects, safety (rotor burst), high cost for carbon fibre</li>
+      <li>Supercapacitor limitation: high self-discharge, low energy density (poor for long-term storage)</li>
+    </ul></div>
+    <div class="tip-box"><div class="tip-text">Exam tip: For flywheel, draw disc + shaft + magnetic bearings. Write E = ½Iω². For supercapacitor, draw two carbon electrodes with + / − ion layers at surface. Key comparison: supercapacitor has higher power but lower energy density than flywheel.</div></div>
+  </div>
+</div>
+
+</div>
+
+<script>
+function showUnit(idx, btn) {
+  for(let i=0;i<6;i++){
+    const p = document.getElementById('unit-'+i);
+    if(p) p.classList.toggle('active', i===idx);
+  }
+  document.querySelectorAll('.utab').forEach((b,i)=>{
+    if(i===idx){b.style.background='#EEEDFE';b.style.color='#3C3489';b.style.borderColor='#AFA9EC';}
+    else{b.style.background='';b.style.color='';b.style.borderColor='';}
+  });
+}
+function showQ(unit, idx, btn) {
+  const parent = btn.closest('.unit-panel');
+  parent.querySelectorAll('.ans-card').forEach((c,i)=>{
+    c.classList.toggle('visible', i===idx);
+  });
+  parent.querySelectorAll('.qbtn').forEach(b=>{
+    b.style.background=''; b.style.color=''; b.style.borderColor='';
+    b.classList.remove('aq');
+  });
+  btn.style.background='#EEEDFE'; btn.style.color='#3C3489'; btn.style.borderColor='#AFA9EC';
+  btn.classList.add('aq');
+}
+</script>
